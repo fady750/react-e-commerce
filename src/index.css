@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    box-sizing: border-box;
+}
+
+.noScroll{
+    overflow: hidden;
+}
+.scroll{
+    overflow: scroll;
+}
+
+
+
+
+.cardCollection .words{
+    opacity:0;
+    transition-property:all;
+    transition-duration: 700ms;
+}
+.cardCollection:hover .words{
+    opacity: 1;
+    top: 55%;
+}
+.product_card:hover .product_card_info{
+    display:none;
+}
+.product_card_info{
+    font-weight: 200;
+    font-size: 14px;
+    transition-property: all;
+    transition-duration: 800ms;
+}
+.product_card_btn{
+    font-weight: 200;
+    font-size: 14px;
+    padding: 13px 30px;
+    border: 1px black solid;
+    width: 100%;
+    transition-property: all;
+    transition-duration: 400ms;
+    letter-spacing: 0.1rem;
+    display: none;
+}
+.product_card:hover .product_card_btn{
+    display: block;
+}
+.product_card_btn:hover{
+    background: black;
+    color: white;
+}
+.product_card .wishlist_logo{
+    display: none;
+}
+.product_card:hover .wishlist_logo{
+    display: block;
+}
+.product_card .cart_logo{
+    display: none;
+}
+.product_card:hover .cart_logo{
+    display: block;
+}
+
+
+
+
+.loginInput input:placeholder-shown{
+    color: gray;
+}
+
+
+@layer components{
+    .input{
+    @apply rounded-full border border-stone-200 px-4 py-2 text-sm
+    transition-all duration-300 focus:outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-2
+    md:px-6 md:py-3
+    }
+    .loader {
+    width: 45px;
+    aspect-ratio: 0.75;
+    --c: no-repeat linear-gradient( theme(colors.stone.800) 0 0);
+    background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
+    background-size: 20% 50%;
+    animation: loading 1s infinite linear;
+    }
+    
+    @keyframes loading {
+    20% {
+        background-position: 0% 0%, 50% 50%, 100% 50%;
+    }
+    40% {
+        background-position: 0% 100%, 50% 0%, 100% 50%;
+    }
+    60% {
+        background-position: 0% 50%, 50% 100%, 100% 0%;
+    }
+    80% {
+        background-position: 0% 50%, 50% 50%, 100% 100%;
+    }
+    }
+    
+}
