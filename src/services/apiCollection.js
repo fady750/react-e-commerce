@@ -22,6 +22,20 @@ export async function getProductByCollection(params) {
     return data
 }
 
+
+export async function updateProduct(obj){
+    console.log(obj);
+    const {data, error} = await supabase
+    .from("products")
+    .update(obj)
+    .eq("collection", "Shoes");
+    if(error){
+        console.error(error.message);
+        throw new Error("update shoes product filed");
+    }
+    return data;
+}
+
 export async function getProductById(params) {
     let { data, error } = await supabase
     .from('products')

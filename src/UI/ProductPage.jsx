@@ -8,7 +8,7 @@ import Button from "./Button";
 import { formatCurrency, setItemToCart } from "../utils/helpers";
 import { isAuth, UserProfile } from "../features/user/UserSlice";
 import { getCart, getCartLocalStorageKey } from "../features/cart/cartSlice";
-
+import {updateShoes} from "../features/Collection/updateShoesDescription"
 function ProductPage() {
 
     const product = useLoaderData();
@@ -23,7 +23,7 @@ function ProductPage() {
     const Auth = useSelector(isAuth);
     const user = useSelector(UserProfile);
     const cartLocalStorageKey = useSelector(getCartLocalStorageKey);
-
+    console.log(product);
 
 
     function decrementQuantity (){
@@ -96,7 +96,7 @@ function ProductPage() {
 
 
 
-
+            <button onClick={()=>{updateShoes()}} >Update main branch </button>
 
 
             <div className="w-full md:w-1/2 px-[20px] md:pt-[20px] lg:px-0 lg:w-auto" >
@@ -150,7 +150,7 @@ function ProductPage() {
 
 
                     <div className="py-6 max-w-[150px] " >
-                        <p className="text-lg" >{product.description}</p>
+                        {/* <p className="text-lg" >{product.description}</p> */}
                     </div>
                 </div>
             </div>

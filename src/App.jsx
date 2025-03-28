@@ -121,7 +121,6 @@ function App() {
         const wishListLocalStorage = window.localStorage.getItem(wishlistLocalStorageKey);
         if(wishListLocalStorage !== null){
           const arrayOfWishlist = JSON.parse(wishListLocalStorage);
-          // arrayOfWishlist.map((ele) =>dispatch(setWishlistItem(ele)));
           dispatch(setWishListArray(arrayOfWishlist));
         }
         const cartLocalStorage = window.localStorage.getItem(cartLocalStorageKey);
