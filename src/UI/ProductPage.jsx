@@ -146,12 +146,12 @@ function ProductPage() {
 
 
 
+                    <button>update on temp branch</button>
 
 
-
-                    <div className="py-6 max-w-[150px] " >
+                    {/* <div className="py-6 max-w-[150px] " >
                         <p className="text-lg" >{product.description}</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
