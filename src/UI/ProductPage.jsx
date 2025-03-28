@@ -8,7 +8,8 @@ import Button from "./Button";
 import { formatCurrency, setItemToCart } from "../utils/helpers";
 import { isAuth, UserProfile } from "../features/user/UserSlice";
 import { getCart, getCartLocalStorageKey } from "../features/cart/cartSlice";
-
+import {updateShoes} from "../features/Collection/updateDescriptionFiled"
+import ProductDescriptions from "./ProductDescriptions";
 function ProductPage() {
 
     const product = useLoaderData();
@@ -23,7 +24,10 @@ function ProductPage() {
     const Auth = useSelector(isAuth);
     const user = useSelector(UserProfile);
     const cartLocalStorageKey = useSelector(getCartLocalStorageKey);
-    console.log(product);
+    // console.log(product);
+    const ProductDescription = product.descriptions;
+    // const {productDetails} = ProductDescription
+    console.log(ProductDescription);
 
 
     function decrementQuantity (){
@@ -113,6 +117,7 @@ function ProductPage() {
                         </ul>
                     </div>
 
+
                     <div className="py-2" >
                         <div className="text-left font-normal text-sm">
                             {activeSize.quantity} in stock
@@ -146,12 +151,8 @@ function ProductPage() {
 
 
 
-                    <button>update on temp branch</button>
 
-
-                    {/* <div className="py-6 max-w-[150px] " >
-                        <p className="text-lg" >{product.description}</p>
-                    </div> */}
+                    <ProductDescriptions productDetails={ProductDescription} />
                 </div>
             </div>
         </div>
