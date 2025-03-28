@@ -23,7 +23,7 @@ function ProductPage() {
     const Auth = useSelector(isAuth);
     const user = useSelector(UserProfile);
     const cartLocalStorageKey = useSelector(getCartLocalStorageKey);
-
+    console.log(product);
 
 
     function decrementQuantity (){
