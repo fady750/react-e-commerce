@@ -22,13 +22,12 @@ export async function getProductByCollection(params) {
     return data
 }
 
-
 export async function updateProduct(obj){
     console.log(obj);
     const {data, error} = await supabase
     .from("products")
     .update(obj)
-    .eq("collection", "Shoes");
+    .eq("collection", "Woman");
     if(error){
         console.error(error.message);
         throw new Error("update shoes product filed");

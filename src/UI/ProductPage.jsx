@@ -8,7 +8,8 @@ import Button from "./Button";
 import { formatCurrency, setItemToCart } from "../utils/helpers";
 import { isAuth, UserProfile } from "../features/user/UserSlice";
 import { getCart, getCartLocalStorageKey } from "../features/cart/cartSlice";
-import {updateShoes} from "../features/Collection/updateShoesDescription"
+import {updateShoes} from "../features/Collection/updateDescriptionFiled"
+import ProductDescriptions from "./ProductDescriptions";
 function ProductPage() {
 
     const product = useLoaderData();
@@ -23,7 +24,10 @@ function ProductPage() {
     const Auth = useSelector(isAuth);
     const user = useSelector(UserProfile);
     const cartLocalStorageKey = useSelector(getCartLocalStorageKey);
-    console.log(product);
+    // console.log(product);
+    const ProductDescription = product.descriptions;
+    // const {productDetails} = ProductDescription
+    console.log(ProductDescription);
 
 
     function decrementQuantity (){
@@ -95,10 +99,6 @@ function ProductPage() {
             </div>
 
 
-
-            <button onClick={()=>{updateShoes()}} >Update main branch </button>
-
-
             <div className="w-full md:w-1/2 px-[20px] md:pt-[20px] lg:px-0 lg:w-auto" >
                 <div className=" md:px-[40px] md:pb-[70px] lg:px-[70px] w-full">
                     <div className=" pt-[20px] lg:pt-[50px]">
@@ -112,6 +112,7 @@ function ProductPage() {
                             return (<li onClick={() => handleChangeSize(item)} key={item.size} className={` mb-[15px] pr-[15px] cursor-pointer transition-all duration-300 ${item.quantity === 0 && "text-gray-600 line-through cursor-not-allowed"} ${activeSize.size === item.size && " border-b-2  border-black pb-1"} `} >{item.size}</li>)})}
                         </ul>
                     </div>
+
 
                     <div className="py-2" >
                         <div className="text-left font-normal text-sm">
@@ -147,11 +148,7 @@ function ProductPage() {
 
 
 
-
-
-                    <div className="py-6 max-w-[150px] " >
-                        {/* <p className="text-lg" >{product.description}</p> */}
-                    </div>
+                    <ProductDescriptions productDetails={ProductDescription} />
                 </div>
             </div>
         </div>
