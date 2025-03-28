@@ -1,5 +1,6 @@
 import CollectionLinksSection from "./CollectionLinksSection"
 import ProductSlider from "./ProductSlider"
+import Spinner from "./Spinner"
 
 function MainContent() {
     return (

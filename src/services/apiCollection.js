@@ -10,11 +10,12 @@ export async function getProduct() {
     }
     return data
 }
-export async function getProductByCollection(params) {
+export async function getProductByCollection(collection) {
     let { data, error } = await supabase
     .from('products')
     .select('*')
-    .eq("collection", params);
+    .eq("collection", collection)
+    .range(0, 5);
     if(error){
         console.error(error);
         throw new Error("Products not could be loaded");
