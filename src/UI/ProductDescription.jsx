@@ -1,7 +1,7 @@
 function ProductDescription({productDetails=[]}) {
     return (
         <p>
-            {productDetails.map((ele) =>  ( <> {ele}  <br/> </> ) )}
+            {productDetails.map((ele, idx) =>  ( <span key={idx}> {ele}  <br/> </span> ) )}
         </p>
     )
 }
