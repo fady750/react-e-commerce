@@ -2,11 +2,11 @@ import supabase from "./supabase";
 
 
 
-export async function getWishlistByUserid(obj){
+export async function getWishlistByUserid(id){
     let { data: wishlist, error } = await supabase
     .from('wishlist')
     .select('*')
-    .eq("user_id", obj.user_id);
+    .eq("user_id", id);
     if(error){
         console.error(error);
         throw new Error("wishlist items not could be loaded");
@@ -38,11 +38,11 @@ export async function insertWishlistArray(arr){
     const value = await getWishlistByUserid(arr[0]);
     return value;
 }
-export async function deleteItemWishlistFromSupabase(obj){
+export async function deleteWishlistItem(id){
     const { error } = await supabase
     .from('wishlist')
     .delete()
-    .eq("id", obj.id);
+    .eq("id", id);
     if(error){
         console.error(error);
         window.alert("failed to delete item in wishlist")
@@ -50,11 +50,11 @@ export async function deleteItemWishlistFromSupabase(obj){
     }
     return 0;
 }
-export async function clearWishlistFromSupabase(obj){
+export async function clearWishlist(user_id){
     const { error } = await supabase
     .from('wishlist')
-    .delete().
-    eq("user_id",obj.user_id);
+    .delete()
+    .eq("user_id",user_id);
     if(error){
         console.error(error);
         window.alert("failed to clear items in wishlist")
