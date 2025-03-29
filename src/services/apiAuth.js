@@ -29,8 +29,7 @@ export async function signUp ({firstName, lastName, password, email}){
         return userProfile;
     }
 }
-export async function Signin(obj){
-    const {email, password} = obj
+export async function Signin({email, password} ){
     let {data, error} = await supabase.auth.signInWithPassword({
         email,
         password
@@ -55,6 +54,14 @@ export async function getUserProfile({id}){
         window.alert(`Login Error: ${error.message}`);
     }
     return profileData;
+}
+export async function  getCurrentUser(){
+    const {data, error} = await supabase.auth.getSession();
+    if(error){
+        console.error(error.message);
+        throw new Error ("there is something wrong with get user status");
+    }
+    return data.session;
 }
 export async function LogOut (){
     let { error } = await supabase.auth.signOut()
