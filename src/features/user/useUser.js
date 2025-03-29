@@ -6,7 +6,6 @@ export function useUser (){
         queryFn:getCurrentUser,
         queryKey:["user"],
     })
-    console.log(user);
     const isAuth = user!== null && user?.user?.role === "authenticated"
     return {isPending, user, isAuth};
 }

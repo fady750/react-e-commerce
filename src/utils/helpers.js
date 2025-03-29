@@ -1,7 +1,7 @@
 import { clearCartSlice, deleteCartItem, setCartArray, setCartItem, updateQuantitySlice } from "../features/cart/cartSlice";
 import { deleteWishlistItem,clearWishlistState, setWishlistItem, setWishListArray } from "../features/wishList/wishlistSlice";
 import { clearCartFroSupabase, deleteCartItemFromSupabase, getCartByUserId, insertArrayToCart, insertCartItem, updateQuantity } from "../services/apiCart";
-import { clearWishlistFromSupabase, deleteItemWishlistFromSupabase, getWishlistByUserid, insertWishlistArray, insertWishlistItem } from "../services/apiWishlist";
+import { getWishlistByUserid, insertWishlistArray, insertWishlistItem } from "../services/apiWishlist";
 
 export function formatCurrency(value) {
     return new Intl.NumberFormat("en", {
