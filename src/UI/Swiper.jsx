@@ -11,8 +11,9 @@ import { useProductsByCollection } from '../features/Collection/useProductsByCol
 import Spinner from './Spinner';
 
 function SwiperImage({render, collectionType}) {
-    const {isPending , productsCollection} = useProductsByCollection(collectionType)
+    const {isPending , productsCollection} = useProductsByCollection(collectionType);
     if(isPending) return <Spinner/>
+    const ProductCollectionSlice = productsCollection.slice(0, 6);
     return (
         <Swiper
             modules={[Scrollbar, Navigation, Pagination]}
@@ -21,7 +22,7 @@ function SwiperImage({render, collectionType}) {
             navigation
             scrollbar={{ draggable: true }}
         >
-            {productsCollection.map(render)}
+            {ProductCollectionSlice.map(render)}
             <div className=' mt-4' ></div>
         </Swiper>
     )

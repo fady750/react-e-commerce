@@ -6,7 +6,7 @@ export function useDeleteWishlist(id){
     const {isPending, mutate:deleteWishlistItem} = useMutation({
         mutationFn:deleteWishlistItemApi,
         onSuccess:()=>{
-            queryClient.invalidateQueries(["wishlist"]);
+            queryClient.invalidateQueries( {queryKey: ["wishlist"]});
         }
     })
     return{isPending, deleteWishlistItem};

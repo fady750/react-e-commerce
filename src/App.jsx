@@ -22,58 +22,7 @@ import Signup from "./pages/Signup";
 
 
 
-//   const router = createBrowserRouter([
-//     {
-//       path: "/",
-//       element: <AppLayout/>,
-//       errorElement : <Error/>,
-//       children:[
-//         {
-//           path:"/",
-//           element:<Home/>
-//         },
-//         {
-//           path:"wishlist",
-//           element:<WishList/>
-//         },
-//         {
-//           path:"cart",
-//           element:<Cart/>
-//         },
-//         {
-//           path: "collection/:CollectionType",
-//           element: <Collection />,
-//           errorElement: <Error/>,
-//         },
-//         {
-//           path: "search/:ProductName",
-//           element: <ProductByName/>,
-//           errorElement:<Error/>,
-//         },
-//         {
-//           path:"collection/:productSlug/:productId",
-//           element:<ProductPage/>,
-//           loader: productPageLoader,
-//         },
-//         {
-//           path:"checkout",
-//           element:<Checkout/>
-//         },
-//         {
-//           path:"account",
-//           element:<UserInfo/>,
-//         },
-//         {
-//           path:"account/login",
-//           element:<Login/>
-//         },
-//         {
-//           path:"account/register",
-//           element:<Register/>
-//         }
-//       ]
-//     }
-//   ])
+
 
 
 

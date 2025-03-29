@@ -3,7 +3,6 @@ import supabase from "./supabase";
 
 
 export async function getWishlistByUserid(id){
-    console.log(id);
     let { data: wishlist, error } = await supabase
     .from('wishlist')
     .select('*')
@@ -54,8 +53,8 @@ export async function deleteWishlistItem(id){
 export async function clearWishlist(user_id){
     const { error } = await supabase
     .from('wishlist')
-    .delete().
-    eq("user_id",user_id);
+    .delete()
+    .eq("user_id",user_id);
     if(error){
         console.error(error);
         window.alert("failed to clear items in wishlist")

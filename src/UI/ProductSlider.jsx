@@ -10,9 +10,7 @@ import 'swiper/css/pagination';
 import Swiper from './Swiper';
 import ProductItem from './ProductItem';
 
-export default ({collectionType}) => {
-
-    
+export default function ProductSlider ({collectionType}){
     return (
         <div className='w-full py-[50px] px-[20px] md:py-[100px] md:px-[70px]' >
             <div className=' pb-5 text-right font-semibold'> <Link to={`collection/${collectionType}`} > View All </Link> </div>
@@ -21,7 +19,7 @@ export default ({collectionType}) => {
             </section>
         </div>
     );
-};
+}
 
 
 

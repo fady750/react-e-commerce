@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom"
 
-function EmptyCollection() {
+function EmptyTable({tableName}) {
     return (
         <div className=" text-center py-[50px] px-[20px] md:px-[50px] flex flex-col justify-center items-center gap-6" >
-            <h1 className=" font-bold text-[1.5rem]" >Collection</h1>
-            <p className=" text-sm" >This Collections is currently empty.</p>
+            <p className=" text-sm" >This {tableName} is currently empty.</p>
             <Link to="/">
                 Continue shopping
             </Link>
@@ -12,4 +11,4 @@ function EmptyCollection() {
     )
 }
 
-export default EmptyCollection
+export default EmptyTable
