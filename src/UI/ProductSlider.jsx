@@ -13,7 +13,7 @@ import ProductItem from './ProductItem';
 export default function ProductSlider ({collectionType}){
     return (
         <div className='w-full py-[50px] px-[20px] md:py-[100px] md:px-[70px]' >
-            <div className=' pb-5 text-right font-semibold'> <Link to={`collection/${collectionType}`} > View All </Link> </div>
+            <div className=' pb-5 text-right font-semibold'> <Link to={`collection?collectionType=${collectionType}`} > View All </Link> </div>
             <section  >
                 <Swiper collectionType={collectionType} render={(product, idx) =>  { return <SwiperSlide key={idx} ><ProductItem ele={product} /></SwiperSlide>} } />
             </section>

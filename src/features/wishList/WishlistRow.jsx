@@ -1,8 +1,8 @@
 import { useDeleteWishlist } from "./useDeleteWishlist";
 
 function WishlistRow({item}) {
-    const {id, productName, } = item;
-    const {isPending, deleteWishlistItem, price} = useDeleteWishlist(id)
+    const {id, productName,price } = item;
+    const {isPending, deleteWishlistItem} = useDeleteWishlist(id)
 
 
 

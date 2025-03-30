@@ -46,8 +46,9 @@ function App() {
             <Route index element={<Home/>}/>
             <Route path="wishlist" element={<Wishlist/>}/> 
             <Route path="cart" element={<Cart/>} />
-            <Route path="collection/:CollectionType" element={<Products/>}/>
-            <Route path="search/:ProductName" element={<ProductsByName/>}/>
+            <Route path="collection" element={<Products/>}/>
+            {/* <Route path="collection/:CollectionType" element={<Products/>}/> */}
+            {/* <Route path="search/:ProductName" element={<ProductsByName/>}/> */}
             <Route path="collection/:productSlug/:productId"  element={<Product/>}/>
             <Route path="checkout" element={<Checkout/>}/>
             <Route path="account" element={<UserInfo/>}/>

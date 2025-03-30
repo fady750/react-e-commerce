@@ -6,8 +6,8 @@ import { useDeleteWishlist } from "../features/wishList/useDeleteWishlist";
 
 function WishlistIcon({obj}) {
 
-    const {isAuth, user} = useUser()
-    const {isPending:isLoading1, wishlist} = useWishlist( isAuth ? user.user.id : "");
+    const {user} = useUser();
+    const {isPending:isLoading1, wishlist} = useWishlist();
     const {isPending:isLoading2, addWishlist} = useAddWishlist();
     const {isPending:isLoading3, deleteWishlistItem} = useDeleteWishlist()
     if(isLoading1) return;

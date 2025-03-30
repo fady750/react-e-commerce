@@ -11,7 +11,7 @@
 // import {updateShoes} from "../features/Collection/updateDescriptionFiled"
 // import ProductDescriptions from "../UI/ProductDescriptions";
 function Product() {
-
+    
     // const product = useLoaderData();
     // if(product === undefined) {
     //     return <Error />

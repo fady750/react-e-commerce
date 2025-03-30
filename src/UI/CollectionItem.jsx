@@ -15,7 +15,7 @@ function CollectionItem({ele}) {
                 <span className="text-white text-xl font-semibold  absolute top-[47%] left-1/2 -translate-x-1/2 w-full text-center" >{Button}</span>
                 <div className="absolute words top-[58%] left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-3 w-full">
                         <span className="text-white text-xs">{productLength} products</span>
-                        <Link to={`collection/${Link}`} >
+                        <Link to={`collection?collectionType=${link}`} >
                             <button type="button" className=" px-7 py-4 bg-white text-black uppercase ">view</button>
                         </Link>
                 </div>

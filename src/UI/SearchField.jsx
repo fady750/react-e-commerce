@@ -4,7 +4,7 @@ import useClickOutSide from "../hooks/useClickOutSide";
 function SearchField({handleCloseRef=()=>{}}) {
     const navigate = useNavigate();
     const [productName, setProductName] = useState("");
-    const [activeSearch, setActiveSearch] = useState(false);
+    const [setActiveSearch] = useState(false);
     const myRef = useRef(null)
     useClickOutSide(myRef, setActiveSearch)    
     
@@ -14,7 +14,7 @@ function SearchField({handleCloseRef=()=>{}}) {
         let str = productName.trim();
         str = str.replace(/\s+/g, '-');
         handleCloseRef(false);
-        navigate(`search/${str}`);
+        navigate(`collection?productSlug=${str}`);
     }
         return (
             <form className=" mb-5 border-b-2 border-stone-700 flex items-center" onSubmit={(e) => handleSubmitForm(e)} ref={myRef} >
