@@ -64,11 +64,11 @@ export async function updateProduct(obj){
     return data;
 }
 
-export async function getProductById(params) {
+export async function getProductById(id) {
     let { data, error } = await supabase
     .from('products')
     .select('*')
-    .eq("id", params)
+    .eq("id", id)
     .single();
     if(error){
         console.error(error);

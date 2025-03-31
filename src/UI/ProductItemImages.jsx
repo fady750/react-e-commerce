@@ -19,7 +19,7 @@ export default function ProductItemImage({item =[]}) {
             >
                 {item.map((ele, idx)=>{
                     return( <SwiperSlide className='w-full' key={idx} >
-                        <img className='w-full' src={ele}/>
+                        <img className='w-full' src={ele} alt='product'/>
                     </SwiperSlide>
 
                     )
@@ -27,4 +27,4 @@ export default function ProductItemImage({item =[]}) {
             </Swiper>
         </div>
     );
-};
+}
