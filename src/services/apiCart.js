@@ -38,16 +38,17 @@ export async function insertCartItem(obj){
     return data;
 }
 
-export async function updateQuantity(obj){
+export async function updateCartQuantity(obj){
 
-    let value = await deleteCartItemFromSupabase(obj);
-    if(value === null){
-        return;
+    const {error} = await supabase
+    .from("cart")
+    .update(obj)
+    .eq("cart_id", obj.cart_id)
+    if(error){
+        console.log(error.message);
+        throw new Error ("there is something wrong in update cart item");
     }
-    value = await insertCartItem(obj);
-    if(value === null) return;
-    value = await getCartByUserId(obj);
-    return value;
+    return ;
 
 }
 

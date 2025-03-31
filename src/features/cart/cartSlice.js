@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { updateQuantity } from "../../services/apiCart";
+import { updateCartQuantity } from "../../services/apiCart";
 
 const initialState = {
     cart : [],

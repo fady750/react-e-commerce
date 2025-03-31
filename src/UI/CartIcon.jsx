@@ -7,12 +7,8 @@ function CartLogo({obj, activeSize={}}) {
     const {user} = useUser()
     const {isPending, cart} = useCart();
     const {isPending:isLoading, addCartItem} = useAddCart()
-    console.log(isLoading);
-    console.log(isPending);
 
     if(isPending||isLoading) return <Spinner/>;
-    console.log(cart);
-    console.log(obj.id);
     let isFound= cart.find((ele) => ele.id == obj.id)
     function handleAddItem(){
         if(isLoading) return
@@ -27,7 +23,6 @@ function CartLogo({obj, activeSize={}}) {
     if(activeSize === undefined){
         return(<></>)
     }
-    console.log(isFound)
     return(
         <>
         {

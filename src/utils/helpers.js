@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { clearCartSlice, deleteCartItem, setCartArray, setCartItem, updateQuantitySlice } from "../features/cart/cartSlice";
 import { deleteWishlistItem,clearWishlistState, setWishlistItem, setWishListArray } from "../features/wishList/wishlistSlice";
-import { clearCartFroSupabase, deleteCartItemFromSupabase, getCartByUserId, insertArrayToCart, insertCartItem, updateQuantity } from "../services/apiCart";
+import { clearCartFroSupabase, deleteCartItemFromSupabase, getCartByUserId, insertArrayToCart, insertCartItem, updateCartQuantity } from "../services/apiCart";
 import { getWishlistByUserid, insertWishlistArray, insertWishlistItem } from "../services/apiWishlist";
 
 export function formatCurrency(value) {
