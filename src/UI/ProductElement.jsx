@@ -3,12 +3,17 @@ import ProductItemImage from "./ProductItemImages";
 import { formatCurrency } from "../utils/helpers";
 import Button from "./Button";
 import ProductDescriptions from "./ProductDescriptions";
-
+import {useUser} from "../features/user/useUser"
+import {useAddCart} from "../features/cart/useAddCart"
+import Spinner from "./Spinner";
 const ProductContext = createContext();
 
 export default function ProductElement({children, product}){
+    const {isPending, user} = useUser();
     const [activeSize, setActiveSize] = useState(product.sizes.find((ele)=> ele.quantity > 0));
     const [itemQuantity, setItemQuantity] = useState(1);
+    const {isPending:isAddingItem, addCartItem} = useAddCart()
+    if(isPending) return <Spinner/>
     function decrementQuantity (){
         if(itemQuantity <= 1) return
         setItemQuantity((e) => e - 1 );
@@ -24,8 +29,16 @@ export default function ProductElement({children, product}){
             setItemQuantity(1);
         }
     }
+    function handleAddToCart (){
+        const {id, price, images, sizes, productName} = product
+        const orderSize = activeSize.size;
+        const quantity = itemQuantity;
+        const user_id = user.user.id;
+        const obj = {id, price, images, sizes, productName, orderSize, quantity, user_id};
+        addCartItem(obj);
+    }
     return (
-        <ProductContext.Provider value={{product, decrementQuantity, incrementQuantity, handleChangeSize, activeSize, itemQuantity}} >
+        <ProductContext.Provider value={{product, decrementQuantity, incrementQuantity, handleChangeSize, activeSize, itemQuantity, handleAddToCart, isAddingItem}} >
             {children}
         </ProductContext.Provider>
     )
@@ -61,13 +74,13 @@ function ProductHeader(){
 
 function ProductSize(){
     const {product, handleChangeSize, activeSize} = useContext(ProductContext)
-    const {sizes} = product
+    const {sizes} = product;
     return(
         <div className="mt-[30px] mb-[15px]" >
             <h5 className="font-semibold text-left mb-[15px]">Size</h5>
             <ul className="mt-[6px] flex text-xs" >{sizes.map((item)=>{
                 return (<li onClick={() => handleChangeSize(item)} key={item.size} 
-                className={` mb-[15px] pr-[15px] cursor-pointer transition-all duration-300 ${item.quantity === 0 && "text-gray-600 line-through cursor-not-allowed"} ${activeSize.size === item.size && " border-b-2  border-black pb-1"} `} >
+                className={` mb-[15px] pr-[15px] cursor-pointer transition-all duration-300 ${item.quantity === 0 && "text-gray-600 line-through cursor-not-allowed"} ${activeSize?.size === item.size && " border-b-2  border-black pb-1"} `} >
                 {item.size}</li>)})}
             </ul>
         </div>
@@ -90,7 +103,7 @@ function ProductActiveSize(){
 }
 
 function ProductForm(){
-    const {activeSize, itemQuantity, decrementQuantity, incrementQuantity} = useContext(ProductContext)
+    const {activeSize, itemQuantity, decrementQuantity, incrementQuantity, handleAddToCart, isAddingItem} = useContext(ProductContext)
     return(
         <form>
         <div className="py-6 flex flex-wrap">
@@ -100,7 +113,7 @@ function ProductForm(){
                 <p className="py-[11px] w-[42px]" >{itemQuantity}</p>
                 <button type="button" className="pr-[5px] w-[44px] h-[44px]"  onClick={()=> incrementQuantity() } >+</button>
             </div>}
-            {/* { ( activeSize !== undefined &&  activeSize.quantity > 0 ) && <Button handleOnClick={()=> handleAddToCart() } additionStyleProperty="lg:flex-[1] lg:h-[49px]" >Add to cart</Button>} */}
+            { ( activeSize !== undefined &&  activeSize.quantity > 0 ) && <Button disabled={isAddingItem} handleOnClick={()=> handleAddToCart() } additionStyleProperty="lg:flex-[1] lg:h-[49px]" >Add to cart</Button>}
             { (activeSize === undefined || activeSize.quantity <=0 ) &&<Button additionStyleProperty="lg:flex-[1] lg:h-[49px]" >Add to cart</Button> }
             { ( activeSize !== undefined &&  activeSize.quantity > 0 ) &&  
             <div className="mt-[10px] max-w-full w-full md:max-h-[100px]">

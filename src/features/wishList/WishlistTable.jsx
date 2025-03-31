@@ -4,7 +4,6 @@ import { useClearWishlist } from "./useClearWishlist";
 import Spinner from "../../UI/Spinner";
 import WishlistRow from "./WishlistRow"
 import Button from "../../UI/Button";
-import EmptyTable from "../../UI/EmptyTable";
 
 
 function WishlistTable() {
@@ -12,7 +11,6 @@ function WishlistTable() {
     const {isPending:isLoading1, wishlist} = useWishlist(isAuth ? user.user.id : "");
     const {isPending:isLoading2, clearWishlist} = useClearWishlist()
     if(isLoading1) return <Spinner/>
-    if(wishlist.length === 0) return <EmptyTable tableName="wishlist" />
     return (
         <div className="mb-[56px] px-4 md:px-8 lg:px-[80px] flex flex-col " >
             <table className="w-full mb-6">

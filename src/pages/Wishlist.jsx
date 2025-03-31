@@ -1,11 +1,15 @@
+import EmptyTable from "../UI/EmptyTable";
 import FeaturesHeader from "../UI/FeaturesHeader"
 import Spinner from "../UI/Spinner";
 import { useUser } from "../features/user/useUser"
 import WishlistTable from "../features/wishList/WishlistTable"
+import { useWishlist } from "../features/wishList/useWishlist";
 
 function Wishlist() {
     const {isPending} = useUser();
-    if(isPending ) return <Spinner/>
+    const {isPending:isLoading, wishlist} = useWishlist()
+    if(isPending || isLoading ) return <Spinner/>
+    if(wishlist.length === 0) return <EmptyTable tableName="Wishlist" />
     return (
         <main>
             <FeaturesHeader FeaturesName="Wishlist"/>

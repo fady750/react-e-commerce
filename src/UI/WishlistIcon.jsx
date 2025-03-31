@@ -13,7 +13,8 @@ function WishlistIcon({obj}) {
     if(isLoading1) return;
     const isFound = wishlist.find((ele) => ele.id === obj.id)
     function handleAddItem(){
-        const wishlistObj = {...obj,user_id:user.user.id};
+        let {id, productName, price, images, sizes} = obj
+        const wishlistObj = {id, productName, price, images, sizes ,user_id:user.user.id};
         addWishlist(wishlistObj)
     }
     function handleDeleteItem(){

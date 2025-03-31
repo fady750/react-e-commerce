@@ -1,11 +1,10 @@
-import { clearCartSlice } from "../features/cart/cartSlice";
 import supabase from "./supabase";
 
-export async function getCartByUserId(obj){
+export async function getCartByUserId(id){
     let { data, error } = await supabase
     .from('cart')
     .select('*')
-    .eq("user_id",obj.user_id );
+    .eq("user_id", id );
     if(error){
         window.alert("failed to get cart data")
         return null
@@ -52,11 +51,12 @@ export async function updateQuantity(obj){
 
 }
 
-export async function deleteCartItemFromSupabase(obj){
+export async function deleteCartItemFromSupabase(cart_id){
+    console.log(cart_id);
     const { error } = await supabase
     .from('cart')
-    .delete().
-    eq("cart_id",obj.cart_id);
+    .delete()
+    .eq("cart_id", cart_id);
     if(error){
         console.error(error);
         window.alert("failed to delete item in cart")
@@ -65,11 +65,11 @@ export async function deleteCartItemFromSupabase(obj){
     return 0;
 }
 
-export async function clearCartFroSupabase(obj){
+export async function clearCartFroSupabase(user_id){
     const { error } = await supabase
     .from('cart')
     .delete()
-    .eq("user_id",obj.user_id);
+    .eq("user_id",user_id);
     if(error){
         console.error(error);
         window.alert("failed to clear items in cart")

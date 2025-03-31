@@ -2,6 +2,12 @@
 // import { useDispatch, useSelector } from "react-redux";
 // import { Link, useNavigate } from "react-router-dom";
 
+import CartTable from "../features/cart/CartTable"
+import { useCart } from "../features/cart/useCart"
+import EmptyTable from "../UI/EmptyTable";
+import FeaturesHeader from "../UI/FeaturesHeader"
+import Spinner from "../UI/Spinner";
+
 // import { clearCart, formatCurrency, getCartDateFromSupabase } from "../../utils/helpers";
 
 
@@ -13,6 +19,9 @@
 
 
 function Cart() {
+    const {isPending, cart} = useCart();
+    if(isPending) return <Spinner/>
+    if(cart.length === 0) return <EmptyTable tableName="cart"/>
     // const dispatch = useDispatch();
     // const navigate = useNavigate();
     // const cart = useSelector(getCart);
@@ -51,15 +60,16 @@ function Cart() {
 
 
     return (
+        <main>
+            <FeaturesHeader FeaturesName="cart"/>
+            <CartTable/>
+        </main>
+    )
+}
+
+export default Cart
         // <main className="">
-        //     <div className=" border-t-2 border-gray-100 px-4 md:px-8 lg:px-[80px]">
-        //         <h1 className="text-[1.5rem] mt-6 mb-2 text-2xl sm:text-4xl" >Shopping Cart</h1>
-        //         <div className=" mb-3 mt-6 cursor-pointer" >
-        //             <Link to="/">
-        //                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg> Continue Shopping
-        //             </Link>
-        //         </div>
-        //     </div>
+
 
 
 
@@ -153,8 +163,3 @@ function Cart() {
             
         //     </div>
         // </main>
-        <p>Cart</p>
-    )
-}
-
-export default Cart
