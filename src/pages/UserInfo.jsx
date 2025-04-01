@@ -6,14 +6,16 @@
 
 // import { isAuth, UserProfile } from "../features/user/UserSlice"
 
-// import HomeLink from "../UI/HomeLink"
-// import LogOut from "../UI/LogOutLink";
-// import UserOrder from "../features/user/UserOrder";
+import HomeLink from "../UI/HomeLink"
+import LogOut from "../UI/LogOutLink";
+import Spinner from "../UI/Spinner";
+import UserOrder from "../features/user/UserOrder";
+import { useGetOrders } from "../features/user/useGetOrders";
 
 
 function UserInfo() {
-
-
+    const {isPending, orders} = useGetOrders()
+    if(isPending) return <Spinner/>
     // const user = useSelector(UserProfile);
     // const Auth = useSelector(isAuth);
     // const navigate = useNavigate();
@@ -40,7 +42,7 @@ function UserInfo() {
 
     return (
         <div>
-            {/* <div className=" mx-auto pt-[50px] px-[20px] pb-[70px] md:px[70px] ">
+            <div className=" mx-auto pt-[50px] px-[20px] pb-[70px] md:px[70px] ">
                 <div className=" text-center" >
                     <div className=" mb-[30px] inline-flex space-x-2" >
                         <LogOut>Log out</LogOut>
@@ -49,17 +51,16 @@ function UserInfo() {
                     <h1 className="mb-[20px] font-semibold" >MY Account</h1>
                 </div>
                 <div className=" py-[100px]" >
-                    <h5 className=" text-center my-[18px] font-semibold text-lg">{user.firstName} {user.lastName}</h5>
-                    <p className="my-[18px] font-semibold text-lg">{user.Email}</p>
+                    {/* <h5 className=" text-center my-[18px] font-semibold text-lg">{user.firstName} {user.lastName}</h5>
+                    <p className="my-[18px] font-semibold text-lg">{user.Email}</p> */}
                 </div>
                 <div>
-                    {oldOrders.length > 0 &&  oldOrders.map((ele, idx)=>{
+                    {orders.length > 0 &&  orders.map((ele, idx)=>{
                     return(
                         <UserOrder ele = {ele} key={idx}/>
                     )})}
                 </div>
-            </div> */}
-            hello
+            </div>
         </div>
     )
 

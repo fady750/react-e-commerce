@@ -1,6 +1,10 @@
-// import { useRef, useState } from "react";
+import { useRef, useState } from "react";
 // import { Link } from "react-router-dom"
 // import { useSelector } from "react-redux"
+
+import CheckoutElement from "../UI/CheckoutElemet"
+import FeaturesHeader from "../UI/FeaturesHeader"
+import BillElement from "../UI/BillElement";
 
 // import { getCart, getCartTotal } from "../features/cart/cartSlice"
 // import { formatCurrency } from "../utils/helpers";
@@ -16,7 +20,7 @@ function Checkout() {
     // const user = useSelector(UserProfile);
 
 
-    // const formRef = useRef(null);
+    const formRef = useRef(null);
 
 
     // function handleDeliveryPickup(e){
@@ -35,17 +39,29 @@ function Checkout() {
 
 
     return (
+        <main>
+            <FeaturesHeader FeaturesName="Checkout"/>
+            <BillElement>
+                <CheckoutElement>
+                    <CheckoutElement.CheckoutWarningMessage/>
+                    <CheckoutElement.CheckoutForm FormRef={formRef}/>
+                        <BillElement.BillContent>
+                            <BillElement.BillHeader/>
+                            <BillElement.BillSetStatus/>
+                            <BillElement.BillStatus/>
+                            <BillElement.ButtonCheckout formRef={formRef} />
+                        </BillElement.BillContent>
+                </CheckoutElement>
+            </BillElement>
+        </main>
+    )
+}
+
+export default Checkout
+
+
+
         // <main className="">
-
-
-        //     <div className=" border-t-2 border-gray-100 px-4 md:px-8 lg:px-[80px]">
-        //         <h1 className="text-[1.5rem] mt-6 mb-2 text-2xl sm:text-4xl text-center md:text-left">Checkout</h1>
-        //         <div className=" mb-3 mt-6 cursor-pointer" >
-        //             <Link to="/">
-        //                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg> Continue Shopping
-        //             </Link>
-        //         </div>
-        //     </div>
 
 
 
@@ -56,7 +72,9 @@ function Checkout() {
                 
         //         <div className="mr-[32px] h-full w-full lg:w-7/12">
         //             {!Auth &&
-        //             <div className="flex text-red-800 text-sm space-x-1" ><p>if you already have email please </p> <Link to="/account/login" > Login first</Link></div>}
+
+    //             <div className="flex text-red-800 text-sm space-x-1" ><p>if you already have email please </p> <Link to="/account/login" > Login first</Link></div>
+                        // }
                     
         //             <CheckoutForm deliveryStatus = {delivery} ref={formRef}/>
                     
@@ -132,8 +150,3 @@ function Checkout() {
             
         //     </div>
         // </main>
-        <p>checkout</p>
-    )
-}
-
-export default Checkout

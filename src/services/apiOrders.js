@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import supabase from "./supabase";
 
 export async function setOrderToSupabase(obj){
@@ -16,11 +15,11 @@ export async function setOrderToSupabase(obj){
     return 1;
 }
 
-export async function getOrdersByUserId(obj){
+export async function getOrdersByUserId(user_id){
     let { data: orders, error } = await supabase
     .from('orders')
     .select('*')
-    .eq("user_id", obj.user_id);
+    .eq("user_id", user_id);
     if(error){
         window.alert(`An unexpected error occurred during read orders. Please try again later.${error.message}`);
         console.log(error);

@@ -3,12 +3,13 @@ import { formatCurrency } from "../utils/helpers";
 import { useCart } from "../features/cart/useCart";
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router";
+import { useMakeOrder } from "../features/checkout/useMakeOrder";
 
 
 
-const CheckoutContext = createContext();
+export const BillContext = createContext();
 
-export default function CheckoutElement({children}){
+export default function BillElement({children}){
     const {isPending, cart} = useCart();
     const [delivery, setDelivery] = useState("Pickup");
     if(isPending) return <Spinner/>
@@ -17,16 +18,22 @@ export default function CheckoutElement({children}){
         setDelivery(e);
     }
     return (
-        <CheckoutContext.Provider value={{totalCart, delivery, handleDeliveryPickup}}>
-            <div className=" h-full w-full lg:w-4/12 mt-10 lg:mt-0 p-6 border border-black lg:ml-5 ml-0"  >
+        <BillContext.Provider value={{totalCart, delivery, handleDeliveryPickup}}>
                 {children}
-            </div>
-        </CheckoutContext.Provider>
+        </BillContext.Provider>
+    )
+}
+function BillContent({children}){
+    return (
+        <div className=" h-full w-full lg:w-4/12 mt-10 lg:mt-0 p-6 border border-black lg:ml-5 ml-0" >
+            {children}
+        </div>
     )
 }
 
-function CheckoutHeader(){
-    const {totalCart} = useContext(CheckoutContext)
+
+function BillHeader(){
+    const {totalCart} = useContext(BillContext)
     return(
         <>
             <h3 className=" text-xl mb-3" >Cart Totals</h3>
@@ -39,8 +46,8 @@ function CheckoutHeader(){
 }
 
 
-function CheckoutSetStatus(){
-    const {delivery, handleDeliveryPickup} = useContext(CheckoutContext);
+function BillSetStatus(){
+    const {delivery, handleDeliveryPickup} = useContext(BillContext);
     return (
         <div className="py-3">
             <h3 className=" text-xl mb-3" >Delivery</h3>
@@ -69,8 +76,8 @@ function CheckoutSetStatus(){
     )
 }
 
-function CheckoutStatus(){
-    const {delivery, totalCart} = useContext(CheckoutContext)
+function BillStatus(){
+    const {delivery, totalCart} = useContext(BillContext)
     return (
         <div className=" border-y-2 border-gray-200 flex justify-between items-center text-gray-600 text-xs py-3 ">
             <p>Grand Total</p>
@@ -91,7 +98,26 @@ function ButtonToContinueProcess(){
     )
 }
 
-CheckoutElement.CheckoutHeader = CheckoutHeader;
-CheckoutElement.CheckoutSetStatus = CheckoutSetStatus;
-CheckoutElement.CheckoutStatus = CheckoutStatus;
-CheckoutElement.ButtonToContinueProcess = ButtonToContinueProcess;
+function ButtonCheckout({formRef}){
+    const {isPending} = useMakeOrder()
+    function handleLinkClick(e){
+        e.preventDefault(); 
+        if (formRef.current) {
+            formRef.current.requestSubmit();
+        }
+    }
+    return(
+        <button disabled={isPending} type="submit" onClick={ (e) => handleLinkClick(e)} 
+            className={` py-3 px-7 border w-full mt-2 bg-black text-white hover:text-gray-400 ${isPending && "bg-gray-700"} `} >
+            Proceed to CheckOut
+        </button>
+
+    )
+}
+
+BillElement.BillContent = BillContent;
+BillElement.BillHeader = BillHeader;
+BillElement.BillSetStatus = BillSetStatus;
+BillElement.BillStatus = BillStatus;
+BillElement.ButtonToContinueProcess = ButtonToContinueProcess;
+BillElement.ButtonCheckout = ButtonCheckout;

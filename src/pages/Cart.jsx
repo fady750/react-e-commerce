@@ -3,7 +3,7 @@ import CartTable from "../features/cart/CartTable"
 import EmptyTable from "../UI/EmptyTable";
 import FeaturesHeader from "../UI/FeaturesHeader"
 import Spinner from "../UI/Spinner";
-import CheckoutElement from "../UI/CheckoutElement";
+import BillElement from "../UI/BillElement";
 
 
 
@@ -18,12 +18,14 @@ function Cart() {
             <FeaturesHeader FeaturesName="cart"/>
             <div className="px-4 md:px-8 lg:px-[80px] flex flex-col lg:justify-between lg:flex-row"  >
                 <CartTable/>
-                <CheckoutElement>
-                    <CheckoutElement.CheckoutHeader/>
-                    <CheckoutElement.CheckoutSetStatus/>
-                    <CheckoutElement.CheckoutStatus/>
-                    <CheckoutElement.ButtonToContinueProcess/>
-                </CheckoutElement>
+                <BillElement>
+                    <BillElement.BillContent>
+                        <BillElement.BillHeader/>
+                        <BillElement.BillSetStatus/>
+                        <BillElement.BillSetStatus/>
+                        <BillElement.ButtonToContinueProcess/>
+                    </BillElement.BillContent>
+                </BillElement>
             </div>
         </main>
     )
