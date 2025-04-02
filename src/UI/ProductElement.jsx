@@ -1,18 +1,20 @@
 import { createContext, useContext, useState } from "react";
 import ProductItemImage from "./ProductItemImages";
-import { formatCurrency } from "../utils/helpers";
+import { addCartItemToLocalStorage, formatCurrency } from "../utils/helpers";
 import Button from "./Button";
 import ProductDescriptions from "./ProductDescriptions";
 import {useUser} from "../features/user/useUser"
 import {useAddCart} from "../features/cart/useAddCart"
 import Spinner from "./Spinner";
+import { useNavigate } from "react-router";
 const ProductContext = createContext();
 
 export default function ProductElement({children, product}){
-    const {isPending, user} = useUser();
+    const {isPending, user, isAuth} = useUser();
     const [activeSize, setActiveSize] = useState(product.sizes.find((ele)=> ele.quantity > 0));
     const [itemQuantity, setItemQuantity] = useState(1);
-    const {isPending:isAddingItem, addCartItem} = useAddCart()
+    const {isPending:isAddingItem, addCartItem} = useAddCart();
+    const navigate = useNavigate();
     if(isPending) return <Spinner/>
     function decrementQuantity (){
         if(itemQuantity <= 1) return
@@ -33,12 +35,33 @@ export default function ProductElement({children, product}){
         const {id, price, images, sizes, productName} = product
         const orderSize = activeSize.size;
         const quantity = itemQuantity;
-        const user_id = user.user.id;
-        const obj = {id, price, images, sizes, productName, orderSize, quantity, user_id};
-        addCartItem(obj);
+        if(isAuth){
+            const user_id = user.user.id;
+            const obj = {id, price, images, sizes, productName, orderSize, quantity, user_id};
+            addCartItem(obj);
+        }
+        else{
+            const obj = {id, price, images, sizes, productName, orderSize, quantity};
+            addCartItemToLocalStorage(obj);
+        }
+    }
+    function handleBuyItNow (){
+        const {id, price, images, sizes, productName} = product
+        const orderSize = activeSize.size;
+        const quantity = itemQuantity;
+        if(isAuth){
+            const user_id = user.user.id;
+            const obj = {id, price, images, sizes, productName, orderSize, quantity, user_id};
+            addCartItem(obj);
+        }
+        else{
+            const obj = {id, price, images, sizes, productName, orderSize, quantity};
+            addCartItemToLocalStorage(obj);
+        }
+        navigate("/checkout");
     }
     return (
-        <ProductContext.Provider value={{product, decrementQuantity, incrementQuantity, handleChangeSize, activeSize, itemQuantity, handleAddToCart, isAddingItem}} >
+        <ProductContext.Provider value={{product, decrementQuantity, incrementQuantity, handleChangeSize, activeSize, itemQuantity, handleAddToCart, isAddingItem, handleBuyItNow}} >
             {children}
         </ProductContext.Provider>
     )
@@ -103,7 +126,7 @@ function ProductActiveSize(){
 }
 
 function ProductForm(){
-    const {activeSize, itemQuantity, decrementQuantity, incrementQuantity, handleAddToCart, isAddingItem} = useContext(ProductContext)
+    const {activeSize, itemQuantity, decrementQuantity, incrementQuantity, handleAddToCart, isAddingItem, handleBuyItNow} = useContext(ProductContext)
     return(
         <form>
         <div className="py-6 flex flex-wrap">
@@ -117,7 +140,7 @@ function ProductForm(){
             { (activeSize === undefined || activeSize.quantity <=0 ) &&<Button additionStyleProperty="lg:flex-[1] lg:h-[49px]" >Add to cart</Button> }
             { ( activeSize !== undefined &&  activeSize.quantity > 0 ) &&  
             <div className="mt-[10px] max-w-full w-full md:max-h-[100px]">
-                {/* <Button handleOnClick={handleBuyItNow} classNameType="FormButton"> buy it now</Button> */}
+                <Button handleOnClick={handleBuyItNow} classNameType="FormButton"> buy it now</Button>
             </div>}
         </div>
     </form>

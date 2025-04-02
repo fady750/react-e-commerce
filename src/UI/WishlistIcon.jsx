@@ -2,23 +2,42 @@ import { useUser } from "../features/user/useUser"
 import { useWishlist } from "../features/wishList/useWishlist"
 import { useAddWishlist } from "../features/wishList/useAddWishlist";
 import { useDeleteWishlist } from "../features/wishList/useDeleteWishlist";
+import { addWishlistFromLocalStorage, deleteWishlistFromLocalStorage } from "../utils/helpers";
+import { useState } from "react";
 
 
 function WishlistIcon({obj}) {
 
-    const {user} = useUser();
-    const {isPending:isLoading1, wishlist} = useWishlist();
+    const {user, isAuth, isPending} = useUser();
+    let {isPending:isLoading1, wishlist} = useWishlist();
     const {isPending:isLoading2, addWishlist} = useAddWishlist();
-    const {isPending:isLoading3, deleteWishlistItem} = useDeleteWishlist()
-    if(isLoading1) return;
+    const {isPending:isLoading3, deleteWishlistItem} = useDeleteWishlist();
+    const [, setUpdateComponent] = useState(false);
+
+
+    if(isLoading1||isPending) return null;
     const isFound = wishlist.find((ele) => ele.id === obj.id)
+    
     function handleAddItem(){
-        let {id, productName, price, images, sizes} = obj
-        const wishlistObj = {id, productName, price, images, sizes ,user_id:user.user.id};
-        addWishlist(wishlistObj)
+        let {id, productName, price, images, sizes} = obj;
+        if(isAuth){
+            const wishlistObj = {id, productName, price, images, sizes ,user_id:user.user.id};
+            addWishlist(wishlistObj)
+        }
+        else{
+            const wishlistObj = {id, productName, price, images, sizes};
+            addWishlistFromLocalStorage(wishlistObj);
+            setUpdateComponent((e)=> !e);
+        }
     }
     function handleDeleteItem(){
-        deleteWishlistItem(obj.id);
+        if(isAuth){
+            deleteWishlistItem(obj.id);
+        }
+        else{
+            deleteWishlistFromLocalStorage(obj.id);
+            setUpdateComponent((e)=> !e);
+        }
     }
 
     return (

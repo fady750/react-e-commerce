@@ -1,16 +1,29 @@
 import { useUser } from "../user/useUser"
 import { useWishlist } from "./useWishlist";
 import { useClearWishlist } from "./useClearWishlist";
+import {clearWishlistFromLocalStorage} from "../../utils/helpers.js"
 import Spinner from "../../UI/Spinner";
 import WishlistRow from "./WishlistRow"
 import Button from "../../UI/Button";
 
 
-function WishlistTable() {
+function WishlistTable({setUpdateComponent}) {
     const {user, isAuth} = useUser();
     const {isPending:isLoading1, wishlist} = useWishlist(isAuth ? user.user.id : "");
-    const {isPending:isLoading2, clearWishlist} = useClearWishlist()
+    const {isPending:isLoading2, clearWishlist} = useClearWishlist();
     if(isLoading1) return <Spinner/>
+
+    function clearWishlistItems(){
+        if(isAuth){
+            clearWishlist(user.user.id)
+        }
+        else{
+            clearWishlistFromLocalStorage();
+            setUpdateComponent((e) => !e);
+        }
+    }
+
+
     return (
         <div className="mb-[56px] px-4 md:px-8 lg:px-[80px] flex flex-col " >
             <table className="w-full mb-6">
@@ -26,13 +39,13 @@ function WishlistTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {wishlist.map((ele, idx)=>{return (<WishlistRow item={ele} key={idx}/>)})}
+                    {wishlist.map((ele, idx)=>{return (<WishlistRow setUpdateComponent={setUpdateComponent} item={ele} key={idx}/>)})}
                 </tbody>
             </table>
                 
                 
 
-            <Button additionStyleProperty=" w-full sm:w-48 " disabled={isLoading2} handleOnClick={()=>clearWishlist(user.user.id)}  >Clear Wishlist</Button>
+            <Button  disabled={isLoading2} handleOnClick={clearWishlistItems}  >Clear Wishlist</Button>
             </div>
     )
 }

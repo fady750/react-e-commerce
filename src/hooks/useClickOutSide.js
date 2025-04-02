@@ -1,20 +1,21 @@
 import { useEffect, useRef } from "react";
 
-function useClickOutSide(ref, setState) {
+export default function useClickOutside( onClose, listenCaptured = true){
+    const windowRef = useRef();
     useEffect(function(){
-        if(ref === undefined || ref.current === null){
-            return
-        };
-        
-        let handler = (e) => {
-        if(!ref.current.contains(e.target)){
-            setState(false);
+        function handleClick(e){
+        if(windowRef.current && !windowRef.current.contains(e.target)){
+            onClose();
         }
-    }
-        addEventListener("mousedown", handler);
-        return()=> removeEventListener("mousedown", handler);
+        }
     
-    })
+        document.addEventListener("click", handleClick, listenCaptured);
+    
+    
+        return () =>  document.removeEventListener("click", handleClick, listenCaptured);
+    
+    }, [onClose, listenCaptured]);
+    return windowRef;
 }
 
-export default useClickOutSide
+

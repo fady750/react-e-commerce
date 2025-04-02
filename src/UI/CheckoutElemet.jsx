@@ -19,7 +19,6 @@ export default function CheckoutElement({children}){
     const {register, handleSubmit, formState} = useForm();
     if(isPending || isLoading) return <Spinner/>
     function onSubmit(data){
-        console.log(data)
         const {address, email, name, phoneNumber} = data;
         let Total = totalCart;
         if(delivery === "City"){
@@ -60,11 +59,12 @@ function CheckoutWarningMessage(){
     )
 }
 
-function CheckoutForm({FormRef}){
+function CheckoutForm({FormRef, children}){
     const {register, handleSubmit, onSubmit, formState, isAuth, user } = useContext(CheckoutContext);
     const {errors} = formState
     return(
         <div className="mr-[32px] h-full w-full lg:w-7/12">
+            {children}
             <form onSubmit={handleSubmit(onSubmit)} ref={FormRef}>
                 <div className="my-4" >
                     <InputFiled id="name" Label="Name" error={errors?.name?.message} >

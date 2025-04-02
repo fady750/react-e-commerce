@@ -8,7 +8,7 @@ function ProductItem({ele}) {
     const {productName, price,id,slug } = ele
     const imgUrl1 = ele?.images[0];
     const imgUrl2 = ele?.images[1];
-    const [activeSize, setActiveSize] = useState(ele.sizes.find((item)=> item.quantity > 0));
+    const [activeSize] = useState(ele.sizes.find((item)=> item.quantity > 0));
     return (
         <div className=' cursor-pointer product_card p-[10px] relative '>
             <Link to={`/collection/${slug}/${id}`} >

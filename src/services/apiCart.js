@@ -53,7 +53,6 @@ export async function updateCartQuantity(obj){
 }
 
 export async function deleteCartItemFromSupabase(cart_id){
-    console.log(cart_id);
     const { error } = await supabase
     .from('cart')
     .delete()

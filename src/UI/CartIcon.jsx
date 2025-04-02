@@ -1,24 +1,36 @@
+import { useState } from "react";
 import { useCart } from "../features/cart/useCart";
 import { useAddCart } from "../features/cart/useAddCart";
 import { useUser } from "../features/user/useUser";
-import Spinner from "./Spinner";
+import { addCartItemToLocalStorage } from "../utils/helpers";
+
+
 
 function CartLogo({obj, activeSize={}}) {
-    const {user} = useUser()
+    const {user, isAuth} = useUser()
     const {isPending, cart} = useCart();
-    const {isPending:isLoading, addCartItem} = useAddCart()
+    const {isPending:isLoading, addCartItem} = useAddCart();
+    const [, setUpdateComponent] = useState(false);
 
-    if(isPending||isLoading) return <Spinner/>;
-    let isFound= cart.find((ele) => ele.id == obj.id)
+    if(isPending||isLoading) return null;
+    let isFound= cart.find((ele) => ele.id === obj.id)
     function handleAddItem(){
-        if(isLoading) return
-
         const {id, price, images, sizes, productName} = obj
         const orderSize = activeSize.size;
-        const user_id = user.user.id;
-        let newObj = {id, price, images, sizes, productName, user_id,orderSize ,quantity:1};
-        addCartItem(newObj);
+        if(isAuth){
+            const user_id = user.user.id;
+            let newObj = {id, price, images, sizes, productName, user_id,orderSize ,quantity:1};
+            addCartItem(newObj);
+        }
+        else{
+            let newObj = {id, price, images, sizes, productName, orderSize ,quantity:1}
+            addCartItemToLocalStorage(newObj);
+            setUpdateComponent( (e) => !e );
+        }
+
     }
+
+
 
     if(activeSize === undefined){
         return(<></>)

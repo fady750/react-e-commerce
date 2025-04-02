@@ -3,15 +3,22 @@ import Spinner from "../../UI/Spinner"
 import CartRow from "./CartRow";
 import { useUser } from "../user/useUser";
 import { useClearCart } from "./useClearCart";
+import { clearCartFromLocalStorage } from "../../utils/helpers";
 
 
-function CartTable() {
+function CartTable({setUpdateComponent}) {
     const {isPending, cart} = useCart();
-    const { isPending:isLoading1, user} = useUser();
+    const { isPending:isLoading1, user, isAuth} = useUser();
     const {isPending:isLoading2, clearCart} = useClearCart()
     if(isPending||isLoading1) return <Spinner/>
     function handleClearCart (){
-        clearCart(user.user.id)
+        if(isAuth){
+            clearCart(user.user.id)
+        }
+        else{
+            clearCartFromLocalStorage();
+            setUpdateComponent((e) => !e);
+        }
     }
     return (
             <div className="mb-[56px] ">
@@ -27,7 +34,7 @@ function CartTable() {
                                 </tr>
                         </thead>
                         <tbody>
-                                {cart.map((ele, idx)=>{return (<CartRow item={ele} key={idx}/>)})}
+                                {cart.map((ele, idx)=>{return (<CartRow setUpdateComponent={setUpdateComponent} item={ele} key={idx}/>)})}
                         </tbody>
                     </table> 
                     <button type="button" 

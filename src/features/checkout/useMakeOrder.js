@@ -3,7 +3,6 @@ import { setOrderToSupabase } from "../../services/apiOrders";
 import { useNavigate } from "react-router";
 
 export function useMakeOrder(){
-    console.log("make order function")
     const queryClient = useQueryClient()
     const navigate = useNavigate()
     const {isPending, mutate:setOrder} = useMutation({

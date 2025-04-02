@@ -1,23 +1,12 @@
-import { Link, useNavigate } from "react-router-dom"
-import { LogOut } from "../services/apiAuth";
-import { userLogout } from "../features/user/UserSlice";
-import { useDispatch } from "react-redux";
-import { clearWishlistState } from "../features/wishList/wishlistSlice";
-import { clearCartSlice } from "../features/cart/cartSlice";
+import { Link } from "react-router-dom"
+
+import { useLogout } from "../features/authentication/useLogout";
 
 function LogOutLink({children}) {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    async function handleLogout() {
-        await LogOut();
-        dispatch(userLogout())
-        dispatch(clearWishlistState());
-        dispatch(clearCartSlice());
-        navigate("/");
-    }
+    const {isPending, logout} = useLogout()
     return (
-        <div className="text-gray-600 font-normal text-sm mx-1" >
-            <Link onClick={()=> handleLogout()}>{children}</Link>
+        <div aria-disabled={isPending} className="text-gray-600 font-normal text-sm mx-1" >
+            <Link onClick={()=> logout()}>{children}</Link>
         </div>
     )
 }

@@ -3,12 +3,8 @@ import BurgerIcon from "./BurgerIcon"
 import Logo from "./Logo"
 import HeaderCollectionLink from "./HeaderCollectionLink"
 import HeaderLinks from "./HeaderLinks"
-import { Link } from "react-router"
-import Links from "./Links"
-import { useUser } from "../features/user/useUser"
 
 function Header() {
-    const {isAuth} = useUser()
     const headerCollectionType = ["Men", "Woman", "Shoes"];
     const [scrolled, setScrolled] = useState(false);
     const handleOnScroll = ()=>{

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import EmptyTable from "../UI/EmptyTable";
 import FeaturesHeader from "../UI/FeaturesHeader"
 import Spinner from "../UI/Spinner";
@@ -7,13 +8,14 @@ import { useWishlist } from "../features/wishList/useWishlist";
 
 function Wishlist() {
     const {isPending} = useUser();
-    const {isPending:isLoading, wishlist} = useWishlist()
+    const {isPending:isLoading, wishlist} = useWishlist();
+    const [, setUpdateComponent] = useState(false);
     if(isPending || isLoading ) return <Spinner/>
     if(wishlist.length === 0) return <EmptyTable tableName="Wishlist" />
     return (
         <main>
             <FeaturesHeader FeaturesName="Wishlist"/>
-            <WishlistTable />
+            <WishlistTable setUpdateComponent={setUpdateComponent} />
         </main>
     )
 }

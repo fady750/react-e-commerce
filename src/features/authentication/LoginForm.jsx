@@ -8,9 +8,12 @@ function LoginForm() {
     const {register, formState, handleSubmit, reset} = useForm()
     const {errors} = formState;
     function onSubmit({email, password}){
-        login({email, password})
+        login({email, password}, {
+            onSettled:()=>{
+                reset()
+            }
+        })
     }
-    console.log(errors)
     return (
         <form className="max-w-[500px] mx-auto space-y-5 mt-6" onSubmit={handleSubmit(onSubmit)} >
             <InputFiled error={errors?.email?.message}>

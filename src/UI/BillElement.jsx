@@ -4,6 +4,7 @@ import { useCart } from "../features/cart/useCart";
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router";
 import { useMakeOrder } from "../features/checkout/useMakeOrder";
+import { useUser } from "../features/user/useUser";
 
 
 
@@ -99,7 +100,8 @@ function ButtonToContinueProcess(){
 }
 
 function ButtonCheckout({formRef}){
-    const {isPending} = useMakeOrder()
+    const {isPending} = useMakeOrder();
+    const {isAuth} = useUser()
     function handleLinkClick(e){
         e.preventDefault(); 
         if (formRef.current) {
@@ -107,8 +109,8 @@ function ButtonCheckout({formRef}){
         }
     }
     return(
-        <button disabled={isPending} type="submit" onClick={ (e) => handleLinkClick(e)} 
-            className={` py-3 px-7 border w-full mt-2 bg-black text-white hover:text-gray-400 ${isPending && "bg-gray-700"} `} >
+        <button disabled={isPending || !isAuth} type="submit" onClick={ (e) => handleLinkClick(e)} 
+            className={` py-3 px-7 border w-full mt-2 bg-black text-white hover:text-gray-400 ${(isPending || !isAuth )&& "bg-gray-700 cursor-not-allowed "} `} >
             Proceed to CheckOut
         </button>
 

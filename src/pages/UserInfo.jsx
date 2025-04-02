@@ -1,44 +1,18 @@
-// import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useSelector } from "react-redux";
-
-// import { getOrdersByUserId } from "../services/apiOrders";
-
-// import { isAuth, UserProfile } from "../features/user/UserSlice"
-
+import { useNavigate } from "react-router";
 import HomeLink from "../UI/HomeLink"
 import LogOut from "../UI/LogOutLink";
 import Spinner from "../UI/Spinner";
 import UserOrder from "../features/user/UserOrder";
 import { useGetOrders } from "../features/user/useGetOrders";
+import { useUser } from "../features/user/useUser";
 
 
 function UserInfo() {
     const {isPending, orders} = useGetOrders()
-    if(isPending) return <Spinner/>
-    // const user = useSelector(UserProfile);
-    // const Auth = useSelector(isAuth);
-    // const navigate = useNavigate();
-    // const [oldOrders, setOldOrders] = useState([]);
-
-
-
-
-    // useEffect(function(){
-    //     if(Auth){
-    //         getOrders();
-    //     }
-    //     else{
-    //         navigate("/account/login")
-    //     }
-    // }, [Auth, user]);
-
-    // async function getOrders() {
-    //     const values = await getOrdersByUserId(user);
-    //     if(values !== undefined && values !== null){
-    //         setOldOrders(values);
-    //     }
-    // }
+    const {isAuth, isPending:isLoading, user} = useUser()
+    const navigate = useNavigate()
+    if(isPending || isLoading) return <Spinner/>
+    if(!isAuth) navigate("/account/login");
 
     return (
         <div>
@@ -51,8 +25,8 @@ function UserInfo() {
                     <h1 className="mb-[20px] font-semibold" >MY Account</h1>
                 </div>
                 <div className=" py-[100px]" >
-                    {/* <h5 className=" text-center my-[18px] font-semibold text-lg">{user.firstName} {user.lastName}</h5>
-                    <p className="my-[18px] font-semibold text-lg">{user.Email}</p> */}
+                    <h5 className=" text-center my-[18px] font-semibold text-lg">{user.user.user_metadata.fullName}</h5>
+                    <p className="my-[18px] font-semibold text-lg">{user.user.email}</p>
                 </div>
                 <div>
                     {orders.length > 0 &&  orders.map((ele, idx)=>{

@@ -12,7 +12,6 @@ import Home from "./UI/Home"
 import Wishlist from "./pages/WishList";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
-import ProductsByName from "./pages/ProductsByName"
 import Product from "./pages/Product"
 import Checkout from "./pages/Checkout";
 import UserInfo from "./pages/UserInfo";
@@ -47,8 +46,6 @@ function App() {
             <Route path="wishlist" element={<Wishlist/>}/> 
             <Route path="cart" element={<Cart/>} />
             <Route path="collection" element={<Products/>}/>
-            {/* <Route path="collection/:CollectionType" element={<Products/>}/> */}
-            {/* <Route path="search/:ProductName" element={<ProductsByName/>}/> */}
             <Route path="collection/:productSlug/:productId"  element={<Product/>}/>
             <Route path="checkout" element={<Checkout/>}/>
             <Route path="account" element={<UserInfo/>}/>

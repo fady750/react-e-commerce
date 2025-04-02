@@ -2,6 +2,7 @@ import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import useClickOutSide from "../hooks/useClickOutSide";
 function SearchField({handleCloseRef=()=>{}}) {
+    
     const navigate = useNavigate();
     const [productName, setProductName] = useState("");
     const [setActiveSearch] = useState(false);

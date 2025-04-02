@@ -1,29 +1,48 @@
 import { useState } from "react";
-import { formatCurrency} from "../../utils/helpers"
+import { deleteCartItemFromLocalStorage, formatCurrency, updateCartFromLocalStorage} from "../../utils/helpers"
 import { useDeleteCart } from "./useDeleteCart";
 import { useUpdateCartQuantity } from "./useUpdateCartQuantity";
+import { useUser } from "../user/useUser";
 
-function CartRow({item}) {
+function CartRow({item, setUpdateComponent}) {
     const {productName, images, price, orderSize, quantity} = item;
     const {isPending, deleteCartItem} = useDeleteCart()
     const {isPending:isLoading1, updateCart} = useUpdateCartQuantity()
-    const [activeSize] = useState(item.sizes.find((ele) => ele.size == item.orderSize ));
+    const [activeSize] = useState(item.sizes.find((ele) => ele.size === item.orderSize ));
+    const {isAuth} = useUser()
     
     function handleDeleteItem(){
-        // await deleteItemFromCart(item, Auth, dispatch, cartLocalStorageKey);
-        deleteCartItem(item.cart_id);
+        if(isAuth){
+            deleteCartItem(item.cart_id);
+        }
+        else{
+            deleteCartItemFromLocalStorage(item.id);
+            setUpdateComponent((e) => !e);
+        }
     }
 
     function handleIncreaseQuantity(){
         if(activeSize.quantity <= item.quantity) return;
         const newObj = {...item, quantity:quantity+1};
-        updateCart(newObj);
+        if(isAuth){
+            updateCart(newObj);
+        }
+        else{
+            updateCartFromLocalStorage(newObj);
+            setUpdateComponent((e) => !e);
+        }
     }
 
-    async function  handleDecreaseQuantity(){
+    function  handleDecreaseQuantity(){
         if(item.quantity <= 1) return;
         const newObj = {...item, quantity:item.quantity - 1};
-        updateCart(newObj);
+        if(isAuth){
+            updateCart(newObj);
+        }
+        else{
+            updateCartFromLocalStorage(newObj);
+            setUpdateComponent((e) => !e);
+        }
     }
 
     return (

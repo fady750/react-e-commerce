@@ -6,9 +6,7 @@ export function useLogin(){
     const {isPending, mutate:login} = useMutation({
         mutationFn:({email, password}) => Signin({email, password}),
         onSuccess:(data)=>{
-            console.log("login successfully")
-            console.log(data);
-            queryClient.invalidateQueries(["user"]);
+            queryClient.invalidateQueries({queryKey:["user"]});
         }
     })
     return{isPending, login}

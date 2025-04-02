@@ -3,11 +3,11 @@ function Button({children, type="button", classNameType = "primary", disabled = 
     const style={
         primary: base + additionStyleProperty + " bg-white hover:bg-black text-gray-800 hover:text-gray-100 w-full sm:w-48   py-2 px-6  text-center text-xl sm:text-base ",
         FormButton: base + additionStyleProperty + " px-[30px] py-[18px] bg-black text-white hover:bg-white hover:text-black w-full uppercase ",
-        disabled: base + " bg-gray-500 cursor-not-allowed w-full text-center text-xl sm:text-base px-[30px] py-[18px] text-white "
+        disabled: base + additionStyleProperty + " bg-gray-500 cursor-not-allowed text-center text-xl sm:text-base px-[30px] py-[18px] text-white "
     }
     if(disabled){
         return (
-            <button type={type} className={style.disabled} disabled  onClick={() => {}}> 
+            <button type={type} className={style[classNameType] + " bg-gray-500 cursor-not-allowed text-white " } disabled  onClick={() => {}}> 
                 {children}
             </button>
         )
@@ -20,3 +20,4 @@ function Button({children, type="button", classNameType = "primary", disabled = 
 }
 
 export default Button
+// style.disabled}
