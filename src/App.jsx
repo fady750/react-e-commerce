@@ -9,8 +9,8 @@ import AppLayout from './AppLayout'
 import Home from "./UI/Home"
 
 
-import Wishlist from "./pages/WishList";
 import Cart from "./pages/Cart";
+import Wishlist from "./pages/Wishlist";
 import Products from "./pages/Products";
 import Product from "./pages/Product"
 import Checkout from "./pages/Checkout";

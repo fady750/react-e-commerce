@@ -45,6 +45,7 @@ function CartRow({item, setUpdateComponent}) {
         }
     }
 
+
     return (
         <tr className={`border-b-2 border-gray-200`} aria-disabled={isPending}>
                 <td className="my-3 flex flex-col items-start sm:items-center">
