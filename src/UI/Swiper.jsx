@@ -11,9 +11,11 @@ import { useProductsByCollection } from '../features/Collection/useProductsByCol
 import Spinner from './Spinner';
 
 function SwiperImage({render, collectionType}) {
+    
     const {isPending , productsCollection} = useProductsByCollection(collectionType);
     if(isPending) return <Spinner/>
     const ProductCollectionSlice = productsCollection.slice(0, 6);
+    
     return (
         <Swiper
             modules={[Scrollbar, Navigation, Pagination]}

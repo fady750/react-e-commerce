@@ -9,15 +9,15 @@ import AppLayout from './AppLayout'
 import Home from "./UI/Home"
 
 
-import Cart from "./pages/Cart";
-import Wishlist from "./pages/Wishlist";
+import Wishlist from "./pages/Wishlist.jsx";
+import Cart     from "./pages/Cart";
 import Products from "./pages/Products";
 import Product from "./pages/Product"
 import Checkout from "./pages/Checkout";
 import UserInfo from "./pages/UserInfo";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-
+import Collections from "./pages/Collections.jsx";
 
 
 
@@ -47,6 +47,8 @@ function App() {
             <Route path="cart" element={<Cart/>} />
             <Route path="collection" element={<Products/>}/>
             <Route path="collection/:productSlug/:productId"  element={<Product/>}/>
+            <Route path="collections" element={<Collections/>}/>
+            <Route path="collections/:collectionType" element={<Collections/>}/>
             <Route path="checkout" element={<Checkout/>}/>
             <Route path="account" element={<UserInfo/>}/>
             <Route path="account/login" element={<Login/>} />

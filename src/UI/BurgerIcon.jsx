@@ -9,9 +9,9 @@ import { createPortal } from "react-dom";
 
 function BurgerIcon() {
     const headerCollectionType = [
-        {propName:"Men", link:`/collection?collectionType=Men`}, 
-        {propName:"Woman", link:`/collection?collectionType=Woman`}, 
-        {propName:"Shoes", link:`/collection?collectionType=Shoes`}, 
+        {propName:"Men", link:`/collection?gender=Men`}, 
+        {propName:"Woman", link:`/collection?gender=Woman`}, 
+        {propName:"Kids", link:`/collection?gender=Kids`}, 
         {propName:"Blogs"}, 
         {propName:"About Us"}
     ];

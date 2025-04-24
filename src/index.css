@@ -25,6 +25,11 @@
     opacity: 1;
     top: 55%;
 }
+.cardCollection:hover img{
+    scale: 1.1;
+}
+
+
 .product_card:hover .product_card_info{
     display:none;
 }

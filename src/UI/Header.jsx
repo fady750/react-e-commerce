@@ -5,7 +5,7 @@ import HeaderCollectionLink from "./HeaderCollectionLink"
 import HeaderLinks from "./HeaderLinks"
 
 function Header() {
-    const headerCollectionType = ["Men", "Woman", "Shoes"];
+    const headerCollectionType = ["Men", "Woman", "Kids"];
     const [scrolled, setScrolled] = useState(false);
     const handleOnScroll = ()=>{
         if(window.scrollY > 50){

@@ -3,7 +3,7 @@ import { Link } from "react-router"
 function HeaderCollectionLink({collectionType}) {
     return (
         <li>
-            <Link to={`/collection?collectionType=${collectionType}`} >
+            <Link to={`/collection?gender=${collectionType}`} >
                 {collectionType}
             </Link>
         </li>
