@@ -1,11 +1,12 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import SearchField from "./SearchField";
 import useClickOutSide from "../hooks/useClickOutSide";
 
 function Links({children, search, importListProp, importButtonProp}) {
     const [activeSearch, setActiveSearch] = useState(false);
-    const myRef = useRef(null)
-    useClickOutSide(myRef, setActiveSearch)
+    const close = ()=>setActiveSearch(false);
+    const myRef = useClickOutSide(close);
+
 
 
     if(activeSearch){

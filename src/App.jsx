@@ -18,7 +18,7 @@ import UserInfo from "./pages/UserInfo";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Collections from "./pages/Collections.jsx";
-
+import CollectionType from "./pages/CollectionType.jsx";
 
 
 
@@ -48,7 +48,7 @@ function App() {
             <Route path="collection" element={<Products/>}/>
             <Route path="collection/:productSlug/:productId"  element={<Product/>}/>
             <Route path="collections" element={<Collections/>}/>
-            <Route path="collections/:collectionType" element={<Collections/>}/>
+            <Route path="collections/:collectionType" element={<CollectionType/>}/>
             <Route path="checkout" element={<Checkout/>}/>
             <Route path="account" element={<UserInfo/>}/>
             <Route path="account/login" element={<Login/>} />

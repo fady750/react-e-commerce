@@ -7,12 +7,12 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { useProductsByCollection } from '../features/Collection/useProductsByCollection';
 import Spinner from './Spinner';
+import { useProductsByGender } from '../features/Collection/useProductsByGender';
 
-function SwiperImage({render, collectionType}) {
+function SwiperImage({render, genderType}) {
     
-    const {isPending , productsCollection} = useProductsByCollection(collectionType);
+    const {isPending, productsCollection} = useProductsByGender(genderType);
     if(isPending) return <Spinner/>
     const ProductCollectionSlice = productsCollection.slice(0, 6);
     

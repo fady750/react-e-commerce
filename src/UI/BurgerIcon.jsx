@@ -18,6 +18,7 @@ function BurgerIcon() {
     const [showNav, setShowNav] = useState(false);
     const close = ()=>setShowNav(false);
     const myRef = useClickOutside(close)
+
     useEffect(function(){
         if(showNav){
             document.body.classList.add("noScroll");
@@ -31,7 +32,7 @@ function BurgerIcon() {
 
     if(showNav === false){
         return(
-            <div   className={` lg:hidden ${!showNav && ""} `}>
+            <div className={` lg:hidden ${!showNav && ""} `}>
                 <button type="button" onClick={()=>setShowNav(true)} >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16"></path></svg>
                 </button>

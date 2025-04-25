@@ -7,9 +7,9 @@ function MainContent() {
         <main className="-mt-20">
             {/* <CollectionLinksSection/> */}
             <CollectionsSwiper/>
-            <ProductSlider collectionType="Men" />
-            <ProductSlider collectionType="Woman" />
-            <ProductSlider collectionType="Shoes" />
+            <ProductSlider genderType="Men" />
+            <ProductSlider genderType="Woman" />
+            <ProductSlider genderType="Kids" />
         </main>
     )
 }

@@ -65,6 +65,20 @@ export async function deleteCartItemFromSupabase(cart_id){
     return 0;
 }
 
+export async function deleteCartItemByIdFromSupabase(id){
+    const { error } = await supabase
+    .from('cart')
+    .delete()
+    .eq("id", id);
+    if(error){
+        console.error(error);
+        window.alert("failed to delete item in cart")
+        return null;
+    }
+    return 0;
+}
+
+
 export async function clearCartFroSupabase(user_id){
     const { error } = await supabase
     .from('cart')

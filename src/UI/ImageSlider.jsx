@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import LeftArrow from "../assets/icons8-double-left-50.png"
 import RightArrow from "../assets/icons8-double-right-50.png"
 
-function imageSlider({imageArray}) {
+function ImageSlider({imageArray}) {
     
     const [imgIndx, setImgIndx] = useState(0);
     
@@ -13,7 +13,7 @@ function imageSlider({imageArray}) {
             setImgIndx(idx%imageArray.length);
         }, [3000])
         return()=> clearTimeout(time);
-    }, [imgIndx])
+    }, [imgIndx, imageArray.length])
 
 
     return (
@@ -45,7 +45,7 @@ function imageSlider({imageArray}) {
                 </div>
 
 
-                <img src={imageArray[imgIndx].url} className=" transform h-[100%] bg-no-repeat bg-cover bg-center  " />
+                <img src={imageArray[imgIndx].url} className=" w-full transform h-[100%] bg-no-repeat bg-cover bg-center  " alt={imgIndx} />
                 <p className="text-center absolute bottom-3 left-2/4 font-semibold">{imgIndx+1}/{imageArray.length}</p>
             </div>
 
@@ -54,4 +54,4 @@ function imageSlider({imageArray}) {
     )
 }
 
-export default imageSlider
+export default ImageSlider

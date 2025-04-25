@@ -4,7 +4,7 @@ import Spinner from "../UI/Spinner";
 import ProductItem from "../UI/ProductItem";
 import EmptyTable from "../UI/EmptyTable";
 
-function Collection({pro=[]}) {
+function Products({pro=[]}) {
 
     const {isPending, productsCollection:Products} = useProductsFilter();
     
@@ -20,4 +20,4 @@ function Collection({pro=[]}) {
 }
 
 
-export default Collection
+export default Products

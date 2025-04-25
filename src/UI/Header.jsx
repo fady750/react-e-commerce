@@ -36,15 +36,15 @@ function Header() {
                         <Logo/>
                     </div>
                     <div>
-                    <ul className="list-none flex items-center space-x-5">
-                        <HeaderLinks>
-                            <HeaderLinks.Search/>
-                            <HeaderLinks.User/>
-                            <HeaderLinks.Wishlist/>
-                            <HeaderLinks.Cart/>
-                        </HeaderLinks>
-                    </ul>                    
-            </div>
+                        <ul className="list-none flex items-center space-x-5">
+                            <HeaderLinks>
+                                <HeaderLinks.Search/>
+                                <HeaderLinks.User/>
+                                <HeaderLinks.Wishlist/>
+                                <HeaderLinks.Cart/>
+                            </HeaderLinks>
+                        </ul>                    
+                    </div>
                 </div>
             </div>
         </nav>
