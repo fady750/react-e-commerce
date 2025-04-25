@@ -21,15 +21,16 @@
 
 ### Backend:
 - **Supabase** – Backend-as-a-service (database, authentication, and API)
-
 ## ✨ Features
 
 - 🛍️ Add products to **cart** or **wishlist**
-- 🔍 Search products by name
-- 🧠 Smart **filtering** and **sorting** in collections
+- 🔍 **Search** products by name
+- 🧠 **Filter & sort** products by price, category, or popularity within a collection
+- 🧾 **Browse by Collection** – View products grouped by curated collections
+- 🚻 **Browse by Gender** – Explore all products filtered by gender (e.g., Men's, Women's)
 - 📱 Fully **responsive design** (mobile-first with media queries)
 - 🔐 **User authentication** to view order history
 - 💳 Simple and clean **checkout flow**
 - 🔁 Persistent user data (wishlist, cart, etc.)
-- 🧩 Built using **advanced design patterns** for modular and reusable components
+- 🧩 Built using **advanced design patterns** like the **Compound Component Pattern** for modular and reusable components
 - 🎨 Clean and minimal UI
