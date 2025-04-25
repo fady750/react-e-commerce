@@ -15,7 +15,7 @@ function Collections() {
                         <div key={idx} className='overflow-hidden cardCollection mt-[40px] px-[10px]' onClick={()=>navigate(`/collections/${ele.collectionUrl}`)}>
                             <div className="mx-auto cursor-pointer relative overflow-hidden">
                                 
-                                <img src={`/public/${ele.imagePath}`} className="h-[60vh] md:h-[70vh] duration-500 w-full" alt={ele.collectionName}/>
+                                <img src={`/${ele.imagePath}`} className="h-[60vh] md:h-[70vh] duration-500 w-full" alt={ele.collectionName}/>
                                 
                                 <span className="text-white lg:text-3xl text-sm  font-semibold  absolute top-[42%] left-1/2 -translate-x-1/2 w-full pt-3 mb-2 text-center z-50" >{ele.collectionName}</span>
                                 
