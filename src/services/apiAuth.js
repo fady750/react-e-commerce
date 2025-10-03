@@ -1,6 +1,5 @@
 import supabase from "./supabase";
 
-
 export async function signup({email, password, fullName}){
     let { data, error } = await supabase.auth.signUp({
         email, password, options:{
@@ -15,7 +14,21 @@ export async function signup({email, password, fullName}){
     return data;
 }
 
+export async function signinWithGoogle({}){
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: 'http://localhost:5173/', // your local dev URL or deployed domain
+        },
+    });
 
+    if (error) {
+        console.error("Google login error:", error.message);
+    } else {
+        console.log("Redirecting to Google...");
+    }
+    console.log(data);
+}
 
 export async function Signin({email, password} ){
     let { data, error } = await supabase.auth.signInWithPassword({
@@ -26,6 +39,7 @@ export async function Signin({email, password} ){
         throw new Error(error.message);
     return data;
 }
+
 export async function getUserProfile({id}){
     let { data :profileData, error } = await supabase
     .from('profile')
@@ -37,6 +51,7 @@ export async function getUserProfile({id}){
     }
     return profileData;
 }
+
 export async function  getCurrentUser(){
     const {data, error} = await supabase.auth.getSession();
     if(error){
@@ -45,10 +60,10 @@ export async function  getCurrentUser(){
     }
     return data.session;
 }
+
 export async function LogOut (){
     let { error } = await supabase.auth.signOut() ;
     if(error)
         throw new Error(error.message);
-
-
 }
+const signinWithGoogl = "hello world";
