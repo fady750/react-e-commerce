@@ -1,14 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-
-
+import { Toaster } from "react-hot-toast";
 
 import AppLayout from './AppLayout'
 import Home from "./UI/Home"
-
-
 import Wishlist from "./pages/Wishlist.jsx";
 import Cart     from "./pages/Cart";
 import Products from "./pages/Products";
@@ -19,12 +15,6 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Collections from "./pages/Collections.jsx";
 import CollectionType from "./pages/CollectionType.jsx";
-
-
-
-
-
-
 const queryClient =  new QueryClient({
   defaultOptions:{
     queries:{
@@ -32,8 +22,6 @@ const queryClient =  new QueryClient({
     }
   }
 })
-
-
 
 function App() {
   return (
@@ -56,8 +44,27 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Toaster 
+          position="top-right"
+          gutter={12}
+          containerStyle={{margin:"18px"}}
+          toastOptions={{
+            success:{
+              duration : 5000,
+            },
+            error:{
+              duration : 8000,
+            },
+            style:{
+              fontSize : "16px",
+              maxWidth : "500px",
+              padding : "16px 24px",
+              backgroundColor : "var(--color-gray-0)",
+              color : "var(--color-gray-700)",
+            }
+          }}
+        />
     </QueryClientProvider>
-
   )
 }
 

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useUser } from "../features/user/useUser"
 import { useNavigate } from "react-router";
 import Spinner from "../UI/Spinner";
-import LoginForm from "../features/authentication/LoginForm";
+import SignInSide from '@/features/authentication/SignInSide';
 
 
 function Login() {
@@ -14,17 +14,12 @@ function Login() {
     }
     }, [isPending, isAuth, navigate])
     if(isPending) return <Spinner/>
-
     return (
-        <main className="text-center py-[30px] px-[20px] md:p-[50px]" >
-            <h1 className="font-bold text-xl" >Login</h1>
-            <LoginForm />
-        </main>
+        <SignInSide/>
     )
 }
 
 export default Login
-
 
 
 

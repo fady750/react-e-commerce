@@ -14,11 +14,11 @@ export async function signup({email, password, fullName}){
     return data;
 }
 
-export async function signinWithGoogle({}){
+export async function signinWithGoogle(){
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: 'http://localhost:5173/', // your local dev URL or deployed domain
+            redirectTo: 'http://localhost:5173/',
         },
     });
 
@@ -66,4 +66,3 @@ export async function LogOut (){
     if(error)
         throw new Error(error.message);
 }
-const signinWithGoogl = "hello world";
