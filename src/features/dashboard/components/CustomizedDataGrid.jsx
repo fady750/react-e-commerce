@@ -4,10 +4,12 @@ import { columns } from '../internals/data/gridData';
 import { useDashboardProducts } from '@/features/dashboard/hooks/useDashboardProducts';
 import Spinner from '@/UI/Spinner';
 import ProductsDialog from './ProductsDialog';
+import DeleteProductDialog from './DeleteProductDialog';
 
 export default function CustomizedDataGrid() {
   const {isPending, Products} = useDashboardProducts()
   const [openDialog, setOpenDialog] = React.useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
   React.useEffect(()=>{
     const openHandler = (e) => {
@@ -16,10 +18,16 @@ export default function CustomizedDataGrid() {
     };
     window.addEventListener("openEditDialog", openHandler);
     return () => window.removeEventListener("openEditDialog", openHandler);
-  }, [isPending])
+  }, [isPending]);
+  React.useEffect(() => {
+    const deleteHandler = (e) => {
+      setSelectedProduct(e.detail);
+      setOpenDeleteDialog(true);
+    };
+    window.addEventListener("deleteProduct", deleteHandler);
+    return () => window.removeEventListener("deleteProduct", deleteHandler);
+}, [isPending]);
   if(isPending) <Spinner/>
-
-
   return (
     <>
       <DataGrid
@@ -64,6 +72,7 @@ export default function CustomizedDataGrid() {
         }}
       />
       <ProductsDialog openDialog={openDialog} setOpenDialog={setOpenDialog} selectedProduct={selectedProduct} />
+      <DeleteProductDialog openDeleteDialog={openDeleteDialog} setOpenDeleteDialog={setOpenDeleteDialog} selectedProduct={selectedProduct} />
     </>
   );
 }

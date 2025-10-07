@@ -112,6 +112,7 @@ export async function getProductById(id) {
     }
     return data
 }
+
 export async function getProductByGender(gender) {
     let { data, error } = await supabase
     .from('products')
@@ -123,4 +124,15 @@ export async function getProductByGender(gender) {
         throw new Error("Products not could be loaded");
     }
     return data
+}
+
+
+export async function deleteProduct(id){
+    const { error } = await supabase
+    .from('products')
+    .delete()
+    .eq('id', id)
+    if(error){
+    throw new Error(error.message);
+    }
 }

@@ -4,7 +4,6 @@ import { useUpdateProducts } from "../hooks/useUpdateProducts";
 
 
 function ProductsDialog({openDialog, setOpenDialog, selectedProduct}) {
-    // const {isPending, updateProducts} = useUpdateProducts()
     const {isPending, updateProduct} = useUpdateProducts()
 
     return (
