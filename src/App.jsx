@@ -15,6 +15,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Collections from "./pages/Collections.jsx";
 import CollectionType from "./pages/CollectionType.jsx";
+import Admin from "./pages/Admin.jsx"
+import Dashboard from "@/features/dashboard/Dashboard"
 const queryClient =  new QueryClient({
   defaultOptions:{
     queries:{
@@ -41,6 +43,9 @@ function App() {
             <Route path="account" element={<UserInfo/>}/>
             <Route path="account/login" element={<Login/>} />
             <Route path="account/register" element={<Signup/>}/>
+            <Route path="admin" element={<Admin/>}>
+              <Route path="dashboard" index element={<Dashboard/>} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

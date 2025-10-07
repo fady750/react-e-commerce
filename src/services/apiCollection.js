@@ -1,5 +1,33 @@
 import supabase from "./supabase";
 
+
+
+export async function updateProduct({id,obj}){
+    const {data, error} = await supabase
+    .from("products")
+    .update(obj)
+    .eq('id', id);
+    if(error){
+        console.error(error.message);
+        throw new Error(error.message);
+    }
+    return data;
+}
+
+export async function UpdateAllProducts(productsArray){
+    console.log("start updating products");
+    const { data, error } = await supabase
+    .from('products')
+    .upsert(productsArray, { onConflict: 'id' })
+
+    if (error) {
+    console.error("Upsert error:", error);
+    } else {
+    console.log("Upsert success:", data);
+    }
+}
+
+
 export async function getProduct() {
     let { data, error } = await supabase
     .from('products')
@@ -60,18 +88,17 @@ export async function getProductFilter({gender, ProductSlug}){
     return data
 }
 
-export async function updateProduct(obj){
-    console.log(obj);
-    const {data, error} = await supabase
-    .from("products")
-    .update(obj)
-    .eq("collection", "Woman");
+export async function getProductForDashboard (){
+    let { data, error } = await supabase
+    .from('products')
+    .select('*')
     if(error){
-        console.error(error.message);
-        throw new Error("update shoes product filed");
+        console.error(error);
+        throw new Error("Products not could be loaded");
     }
-    return data;
+    return data
 }
+
 
 export async function getProductById(id) {
     let { data, error } = await supabase
