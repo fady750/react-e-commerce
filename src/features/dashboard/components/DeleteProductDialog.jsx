@@ -22,11 +22,11 @@ export default function DeleteProductDialog({openDeleteDialog, setOpenDeleteDial
           Delete Product
         </DialogTitle>
         <DialogContent>
-        <Typography>
-          Are you sure you want to delete{" "}
-          <strong>{selectedProduct?.productName}</strong>? <br />
-          This action cannot be undone.
-        </Typography>
+          <Typography>
+            Are you sure you want to delete{" "}
+            <strong>{selectedProduct?.productName}</strong>? <br />
+            This action cannot be undone.
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button loading={isPending} onClick={()=>setOpenDeleteDialog(false)} >Disagree</Button>

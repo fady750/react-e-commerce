@@ -1,10 +1,12 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 function DialogForm({selectedProduct, updateProducts, setOpenDialog}) {
         const {id, productName,Collection,cost,discount,total_quantity,real_price} = selectedProduct || {}
         const [entitysName] = useState(['productName', 'Collection', 'cost', 'discount', 'total_quantity', 'real_price'])
+
+
         const {
             register,
             handleSubmit,
@@ -19,6 +21,8 @@ function DialogForm({selectedProduct, updateProducts, setOpenDialog}) {
                 real_price
             },
         });
+
+
         async function onSubmit(data) {
             let flag = false;
             let obj = Object.keys(dirtyFields).reduce((acc, key) => {
@@ -32,6 +36,7 @@ function DialogForm({selectedProduct, updateProducts, setOpenDialog}) {
             updateProducts({id, obj})
             setOpenDialog(false);
         }
+
     return (
         <Box
             component="form"

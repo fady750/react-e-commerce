@@ -1,0 +1,50 @@
+import supabase from "./supabase";
+
+export async function createCoupon(obj){
+    const {data, error} = await supabase
+    .from("coupons")
+    .insert(obj)
+    .select()
+    if(error){
+        console.error(error.message);
+        throw new Error(error.message);
+    }
+    return data;
+}
+
+export async function getCoupons() {
+    let { data: coupons, error } = await supabase
+    .from('coupons')
+    .select('*')
+    if(error){
+        console.error(error.message);
+        throw new Error(error.message);
+    }
+    return coupons;
+}
+
+export async function updateCoupon({obj, id}){
+    console.log(obj)
+    console.log(id)
+    const { error } = await supabase
+    .from('coupons')
+    .update(obj)
+    .eq('id', id)
+    if(error){
+        console.error(error);
+        throw new Error(error.message);
+    }
+
+}
+
+export async function deleteCoupon(id){
+    const { error } = await supabase
+    .from('coupons')
+    .delete()
+    .eq('id', id)
+    if(error){
+        console.error(error)
+        throw new Error(error.message);
+    }
+    
+}

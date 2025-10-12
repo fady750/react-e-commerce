@@ -1,41 +1,41 @@
 import * as React from 'react';
+import Spinner from '@/UI/Spinner';
 import { DataGrid } from '@mui/x-data-grid';
 import { columns } from '../internals/data/gridData';
-import { useDashboardProducts } from '@/features/dashboard/hooks/useDashboardProducts';
-import Spinner from '@/UI/Spinner';
-import ProductsDialog from './ProductsDialog';
-import DeleteProductDialog from './DeleteProductDialog';
+import CreateCouponDialog from "./CreateCouponDialog";
+import useReadCoupons from '@/features/coupons/hooks/useReadCoupons'
+import EditCouponDialog from './EditCouponDialog';
+import DeleteCouponDialog from './DeleteCouponDialog';
 
 export default function CustomizedDataGrid() {
-  const {isPending, Products} = useDashboardProducts()
-  const [openDialog, setOpenDialog] = React.useState(false);
-  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
-  const [selectedProduct, setSelectedProduct] = React.useState(null);
-  
+  const {isPending, Coupons} = useReadCoupons();
+  const [selectedPCoupon, setSelectedCoupon] = React.useState(null);
+  const [editCouponDialog, setEditCouponDialog] = React.useState(false);
+  const [deleteCouponDialog, setDeleteCouponDialog] = React.useState(false);
+
+  if(isPending) <Spinner/>
   React.useEffect(()=>{
     const openHandler = (e) => {
-      setSelectedProduct(e.detail);
-      setOpenDialog(true);
+      setSelectedCoupon(e.detail);
+      setEditCouponDialog(true);
     };
     window.addEventListener("openEditDialog", openHandler);
     return () => window.removeEventListener("openEditDialog", openHandler);
   }, [isPending]);
-  React.useEffect(() => {
-    const deleteHandler = (e) => {
-      setSelectedProduct(e.detail);
-      setOpenDeleteDialog(true);
-    };
-    window.addEventListener("deleteProduct", deleteHandler);
-    return () => window.removeEventListener("deleteProduct", deleteHandler);
-}, [isPending]);
-  if(isPending) <Spinner/>
-
+  React.useEffect(()=>{
+      const openHandler = (e) => {
+        setSelectedCoupon(e.detail);
+        setDeleteCouponDialog(true);
+      };
+      window.addEventListener("openDeleteDialog", openHandler);
+      return () => window.removeEventListener("openDeleteDialog", openHandler);
+  }, [isPending]);
   return (
     <>
       <DataGrid
         checkboxSelection
         rowHeight={75}
-        rows={Products}
+        rows={Coupons}
         columns={columns}
         getRowClassName={(params) =>
           params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
@@ -73,8 +73,9 @@ export default function CustomizedDataGrid() {
           },
         }}
       />
-      <ProductsDialog openDialog={openDialog} setOpenDialog={setOpenDialog} selectedProduct={selectedProduct} />
-      <DeleteProductDialog openDeleteDialog={openDeleteDialog} setOpenDeleteDialog={setOpenDeleteDialog} selectedProduct={selectedProduct} />
+      <CreateCouponDialog />
+      <EditCouponDialog selectedCoupon={selectedPCoupon} setEditCouponDialog={setEditCouponDialog} editCouponDialog={editCouponDialog} />
+      <DeleteCouponDialog deleteCouponDialog={deleteCouponDialog} setDeleteCouponDialog={setDeleteCouponDialog} selectedCoupon={selectedPCoupon} />
     </>
   );
 }

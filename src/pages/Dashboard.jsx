@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { alpha } from '@mui/material/styles';
-import Header from './components/Header';
-import MainGrid from './components/MainGrid';
+import Header from '../features/dashboard/components/Header';
+import MainGrid from '../features/dashboard/components/MainGrid';
 
 export default function Dashboard(props) {
   return (
