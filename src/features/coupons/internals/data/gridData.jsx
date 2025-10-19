@@ -4,7 +4,7 @@ import ActionMenu from '../../components/ActionMenu';
 
 
 export const columns = [
-  { field: 'couponName', headerName: 'Coupon Name', flex: 1, minWidth: 100 },
+  { field: 'couponCode', headerName: 'Coupon Code', flex: 1, minWidth: 100 },
   { 
     field: 'id',
     headerName: 'ID',

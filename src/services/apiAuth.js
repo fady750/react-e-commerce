@@ -51,6 +51,17 @@ export async function getUserProfile({id}){
     }
     return profileData;
 }
+export async function getAllCustomers(){
+    let { data: profiles, error } = await supabase
+    .from('profiles')
+    .select(`*`)
+    .eq('isAdmin', false)
+    if(error){
+        console.error(error)
+        throw new Error (error.message);
+    }
+    return profiles
+}
 
 export async function  getCurrentUser(){
     const {data, error} = await supabase.auth.getSession();

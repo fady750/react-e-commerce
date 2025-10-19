@@ -23,6 +23,20 @@ export async function getCoupons() {
     return coupons;
 }
 
+export async function getCouponsByName(couponName){
+    if(couponName === "") return null
+    let { data, error } = await supabase
+    .from('coupons')
+    .select('*')
+    .eq('couponCode', couponName)
+    .single()
+    if(error){
+        console.error(error);
+        throw new Error(error.message);
+    }
+    return data;
+}
+
 export async function updateCoupon({obj, id}){
     console.log(obj)
     console.log(id)

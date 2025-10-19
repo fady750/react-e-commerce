@@ -1,17 +1,15 @@
-import { Box, Checkbox, TextField } from "@mui/material"
-import { useState } from "react";
+import { Box, Checkbox, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-function DialogForm({inputs=[], FormID="", defaultValues={}, onSubmit}) {
+function DialogForm({inputs=[], FormID="", defaultValues={}, SelectedMenuInputs=[], onSubmit, children}) {
     
     const {
         register,
         handleSubmit,
         formState: { errors, dirtyFields },
-    } = useForm({
-        defaultValues
-    });
-
+        setError,
+        trigger
+    } = useForm();
     return (
         <Box
             
@@ -21,8 +19,34 @@ function DialogForm({inputs=[], FormID="", defaultValues={}, onSubmit}) {
             onSubmit={handleSubmit(onSubmit)}
             id={FormID}
         >
+            <div className=" flex items-center justify-around" >
+                {
+                    
+                    SelectedMenuInputs.map((input, idx)=>{
+                            return(
+                                <div key={idx} className=" flex items-center justify-center gap-4 my-2" >
+                                    <InputLabel id={`${input.inputPathName}SelectLabel`}>{input.inputLabel}</InputLabel>
+                                    <Select
+                                        key={input.inputPathName}
+                                        variant="outlined"
+                                        labelId={`${input.inputPathName}SelectLabel`}
+                                        id={`${input.inputPathName}SelectLabel`}
+                                        defaultValue={defaultValues[input.inputPathName]}
+                                        label={input.inputLabel}
+                                    >
+                                        {input?.selectedItems.map((ele, idx)=>{
+                                            return(
+                                                <MenuItem value={ele} key={idx}>{ele}</MenuItem>
+                                            )
+                                        })}
+                                    </Select>
+                                </div>
+                            )
+                        })
+                }
+            </div>
             {
-                inputs.map((input)=>{
+                inputs.map((input, idx)=>{
                     if(input.type === "boolean"){
                         return (
                             <div key={input.inputPathName} className=" flex items-center justify-start pl-2">
@@ -38,26 +62,33 @@ function DialogForm({inputs=[], FormID="", defaultValues={}, onSubmit}) {
                             }}
                             {...register(input.inputPathName, {
                                 validate:(value)=>{
-                                    if(value !== ""){
-                                        if(input.type === "Number"){
-                                            // check if input is not a number
-                                            if(isNaN(Number(value))){
-                                                return "value must be a number";
+                                    if(!input.disabled){
+                                        if(value !== ""){
+                                            
+                                            if(input.type === "Number"){
+                                                // check if input is not a number
+                                                if(isNaN(Number(value))){
+                                                    return "value must be a number";
+                                                }
+                                                // check if value in right range 
+                                                if(value > input?.constrains?.value?.max || value < input?.constrains?.value?.min){
+                                                    return `value must be in range of ${input?.constrains?.value?.min}-${input?.constrains?.value?.max}`;
+                                                }
                                             }
-                                            // check if value in right range 
-                                            if(value > input?.constrains?.value?.max || value < input?.constrains?.value?.min){
-                                                return `value must be in range of ${input?.constrains?.value?.min}-${input?.constrains?.value?.max}`;
+                                            else if(input.type === "Text"){
+                                                // check the length of value
+                                                if(value > input?.couponName?.constrains?.Length?.max || value < input?.couponName?.constrains?.Length?.min){
+                                                    return `value must be in range of ${input?.constrains?.value?.min}-${input?.constrains?.value?.max}`;
+                                                }
+
                                             }
                                         }
-                                        else if(input.type === "Text"){
-                                            // check the length of value
-                                            if(value > input?.couponName?.constrains?.Length?.max || value < input?.couponName?.constrains?.Length?.min){
-                                                return `value must be in range of ${input?.constrains?.value?.min}-${input?.constrains?.value?.max}`;
-                                            }
+                                        if(input.inputPathName === "couponCode"){
+                                            return
                                         }
-                                    }
                                     else{
                                         return "this field required"
+                                    }
                                     }
                                 }
                             })}
@@ -66,14 +97,21 @@ function DialogForm({inputs=[], FormID="", defaultValues={}, onSubmit}) {
                             label={input.inputLabel}
                             variant="standard" 
                             defaultValue={defaultValues[input?.inputPathName]} 
+                            value={input.disabled ? defaultValues[input?.inputPathName] : undefined}
                             error={!!errors[input.inputPathName]}
                             helperText={errors[input.inputPathName]?.message}
                             disabled={input.disabled}
                             placeholder={input.placeholder}
+                            onBlur={(e)=>{
+                                if(input.inputPathName === "couponCode"){
+                                    input.handleOnBlur(e.target.value.trim(), setError, trigger);
+                                }
+                            }}
                         />
                     )
                 })
             }
+            {children}
         </Box>  
     )
 }

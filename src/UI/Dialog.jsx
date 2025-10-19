@@ -9,10 +9,10 @@ import DialogImage from "./DialogImage";
 
 const DialogContext = createContext();
 
-function DialogCC({children, StateDialog, setDialog}) {
+function DialogCC({children, StateDialog, setDialog, onCloseFunction}) {
     return (
         <DialogContext.Provider value={{}} >
-            <Dialog open={StateDialog} onClose={() => setDialog(false)} fullWidth>
+            <Dialog open={StateDialog} onClose={onCloseFunction} fullWidth>
                 {children}
             </Dialog>
         </DialogContext.Provider>

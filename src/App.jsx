@@ -18,6 +18,7 @@ import CollectionType from "./pages/CollectionType.jsx";
 import Admin from "./pages/Admin.jsx"
 import Coupons from "./pages/Coupons.jsx";
 import Dashboard from "@/pages/Dashboard"
+import Orders from "@/pages/Orders"
 
 const queryClient =  new QueryClient({
   defaultOptions:{
@@ -48,6 +49,7 @@ function App() {
             <Route path="admin" element={<Admin/>}>
               <Route path="dashboard" index element={<Dashboard/>} />
               <Route path="coupons" element={<Coupons/>} />
+              <Route path="orders" element={<Orders/>} />
             </Route>
           </Route>
         </Routes>
