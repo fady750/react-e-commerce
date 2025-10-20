@@ -69,7 +69,17 @@ export async function  getCurrentUser(){
         console.error(error.message);
         throw new Error ("there is something wrong with get user status");
     }
-    return data.session;
+    const {data:userProfile, error:userError} = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', data.session.user.id)
+    .single()
+    if(userError){
+        console.error(error.message);
+        throw new Error ("there is something wrong with get user profile");
+    }
+    // return {user:data, userProfile};
+    return {user:data, userProfile};
 }
 
 export async function LogOut (){

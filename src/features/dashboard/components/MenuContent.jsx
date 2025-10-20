@@ -16,13 +16,13 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
-import { Link } from 'react-router';
+import { Link, NavLink, useLocation } from 'react-router';
 
 const mainListItems = [
   { text: 'Dashboard', icon: <DashboardRoundedIcon />, href:"dashboard" },
-  { text: 'Analytics', icon: <AnalyticsRoundedIcon />, href:"dashboard" },
-  { text: 'Clients', icon: <PeopleRoundedIcon />, href:"dashboard" },
-  { text: 'Tasks', icon: <AssignmentRoundedIcon />, href:"dashboard" },
+  // { text: 'Analytics', icon: <AnalyticsRoundedIcon />, href:"dashboard" },
+  // { text: 'Clients', icon: <PeopleRoundedIcon />, href:"dashboard" },
+  // { text: 'Tasks', icon: <AssignmentRoundedIcon />, href:"dashboard" },
   { text: 'Coupons', icon: <LocalOfferRoundedIcon />, href:"coupons" },
   { text: 'Orders', icon: <ShoppingCartRoundedIcon />, href:"orders" },
 ];
@@ -34,18 +34,22 @@ const secondaryListItems = [
 ];
 
 export default function MenuContent() {
+  const location = useLocation();
+  const section = location.pathname.startsWith('/admin/') 
+    ? location.pathname.replace('/admin/', '').split('/')[0]
+    : null;
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
       <List dense>
         {mainListItems.map((item, index) => (
-          <Link to={`${item.href}`}>
-            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton selected={index === 0}>
+          <NavLink   key={index} to={`${item.href}`}>
+            <ListItem  disablePadding sx={{ display: 'block', cursor:"pointer" }}>
+              <ListItemButton selected={section === item.href}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItemButton>
             </ListItem>
-          </Link>
+          </NavLink>
         ))}
       </List>
       <List dense>
