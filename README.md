@@ -18,19 +18,54 @@
 - **Custom Hooks** – Reusable logic
 - **Swiper** – Responsive image sliders
 - **Advanced React Patterns** – Including the **Compound Component Pattern** for flexible and scalable UI design
+- **GSAP** – Smooth animations and transitions
+- **MUI & React Icons** – Consistent and elegant iconography
 
 ### Backend:
 - **Supabase** – Backend-as-a-service (database, authentication, and API)
+
+---
+
 ## ✨ Features
 
-- 🛍️ Add products to **cart** or **wishlist**
-- 🔍 **Search** products by name
-- 🧠 **Filter & sort** products by price, category, or popularity within a collection
-- 🧾 **Browse by Collection** – View products grouped by curated collections
-- 🚻 **Browse by Gender** – Explore all products filtered by gender (e.g., Men's, Women's)
-- 📱 Fully **responsive design** (mobile-first with media queries)
-- 🔐 **User authentication** to view order history
-- 💳 Simple and clean **checkout flow**
-- 🔁 Persistent user data (wishlist, cart, etc.)
-- 🧩 Built using **advanced design patterns** like the **Compound Component Pattern** for modular and reusable components
-- 🎨 Clean and minimal UI
+### 🛍️ Core Shopping Experience
+- Add products to **cart** or **wishlist**
+- **Search** products by name
+- **Filter & sort** products by price, category, or popularity within a collection
+- **Browse by Collection** – View products grouped by curated collections
+- **Browse by Gender** – Explore products filtered by gender (e.g., Men's, Women's)
+- Fully **responsive design** (mobile-first)
+
+### 👤 User Features
+- **User authentication** (email & password)
+- **Sign in with Google** via Supabase OAuth
+- **Persistent data** – Wishlist and cart saved even after login
+- **Order history page** to track past orders
+- View **order details** including date, total, discount, and subtotal
+
+### 🧾 Admin Dashboard
+- Add, edit, and delete **products**
+- Manage **collections** and **categories**
+- Track and update **order status**
+- Manage **users** and **discount coupons**
+
+### 💳 Checkout & Orders
+- Streamlined **checkout flow**
+- Apply **discount coupons**
+- Calculate **subtotal**, **discount**, and **final total**
+- Real-time **order updates** from Supabase
+
+### 🧠 Architecture & Design
+- Built with **feature-based architecture**
+- Uses **Context API** for global state management
+- Clean, modular, and scalable code organization
+
+### 🧪 Testing
+- Fully **tested with Cypress (E2E testing)** for core user flows such as:
+  - Adding items to cart and wishlist
+  - Signing in with Google
+  - Completing checkout
+  - Viewing order history
+  - Managing products in admin panel
+
+---
