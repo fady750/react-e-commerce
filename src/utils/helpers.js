@@ -6,16 +6,18 @@ export function formatCurrency(value) {
     currency: "EUR",
     }).format(value);
 }
+
 export function formatDate(date) {
     const options = { 
     year: 'numeric', 
     month: 'long', 
     day: 'numeric',
-    weekday: 'long'
+    // weekday: 'long'
     };
     
     return new Date(date).toLocaleDateString('en-US', options);
 }
+
 
 
 

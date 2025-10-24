@@ -9,32 +9,46 @@ import Spinner from "./Spinner";
 import { useCart } from "../features/cart/useCart";
 import { useMakeOrder } from "../features/checkout/useMakeOrder";
 
+
+
+
 const CheckoutContext = createContext();
 
 export default function CheckoutElement({children}){
-    const {totalCart, delivery} = useContext(BillContext);
+    const {totalCart, delivery, CouponPercent} = useContext(BillContext);
     const {isPending:isLoading, cart} = useCart()
     const {isPending:isLoading2, setOrder} = useMakeOrder()
     const {isAuth, isPending, user} = useUser();
     const {register, handleSubmit, formState} = useForm();
     if(isPending || isLoading) return <Spinner/>
+
     function onSubmit(data){
-        const {address, email, name, phoneNumber} = data;
-        let Total = totalCart;
+        const discount = Math.round(Number(CouponPercent?.percent)/100 * totalCart)
+        const {address, phoneNumber} = data;
+        let totalOrder = totalCart - discount;
         if(delivery === "City"){
-            Total += 2;
+            totalOrder += 2;
         }
         else if(delivery === "OutCity") {
-            Total += 7
+            totalOrder += 7
         }
         const orderItems = cart.map((ele) =>  { return  { cart_id:ele.cart_id,
-            user_id:user.user.id,
             quantity:ele.quantity,
             orderSize:ele.orderSize,
             productName:ele.productName,
-            price:ele.price,
         }})
-        const orderObj = {orderItems, user_id:user.user.id, address, phoneNumber, deliveryStatus:delivery, totalCart:Total}
+        const orderObj = {
+                address, 
+                phoneNumber, 
+                subTotal:totalCart, 
+                deliveryStatus:delivery,
+                orderStatus:"pending",
+                user_id:user?.id,
+                couponCode:CouponPercent?.couponCode || "",
+                discount,
+                totalOrder,
+                orderItems
+            }
         setOrder(orderObj);
     }
     return(
@@ -80,21 +94,21 @@ function CheckoutForm({FormRef, children}){
                         isAuth
                         ?
                         <InputFiled id="email" Label="Email" error={errors?.email?.message}  >
-                        <input id="email"  type="email" value={user.user.email} disabled {...register("email")} 
-                            className="w-full outline-0 border bg-gray-200 border-gray-600 mt-1 mb-2 py-2 px-4"
-                        />
+                            <input id="email"  type="email" value={user?.email} disabled {...register("email")} 
+                                className="w-full outline-0 border bg-gray-200 border-gray-600 mt-1 mb-2 py-2 px-4"
+                            />
                         </InputFiled>
                         :
                         <InputFiled id="email" Label="Email" error={errors?.email?.message}  >
-                        <input id="email"  type="email"  {...register("email",{
+                            <input id="email"  type="email"  {...register("email",{
                             required:"This Filed Is Required", 
                             pattern:{
                                 value:/\S+@\S+\.\S+/,
                                 message:"Provide valid email address"
                             }    
-                        }) } 
-                            className="w-full outline-0 border border-gray-600 mt-1 mb-2 py-2 px-4"
-                        />
+                            }) } 
+                                className="w-full outline-0 border border-gray-600 mt-1 mb-2 py-2 px-4"
+                            />
                         </InputFiled>
                     }
                 </div>

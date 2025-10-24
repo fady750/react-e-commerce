@@ -78,7 +78,6 @@ export async function  getCurrentUser(){
         console.error(error.message);
         throw new Error ("there is something wrong with get user profile");
     }
-    // return {user:data, userProfile};
     return {user:data, userProfile};
 }
 

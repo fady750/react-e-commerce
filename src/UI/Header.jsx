@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
+import { useUser } from "../features/user/useUser"
 import BurgerIcon from "./BurgerIcon"
-import Logo from "./Logo"
 import HeaderCollectionLink from "./HeaderCollectionLink"
 import HeaderLinks from "./HeaderLinks"
+import Logo from "./Logo"
 
 function Header() {
     const headerCollectionType = ["Men", "Woman", "Kids"];
     const [scrolled, setScrolled] = useState(false);
+    const {userProfile} = useUser()
     const handleOnScroll = ()=>{
         if(window.scrollY > 50){
             setScrolled(true);
@@ -42,6 +44,7 @@ function Header() {
                                 <HeaderLinks.User/>
                                 <HeaderLinks.Wishlist/>
                                 <HeaderLinks.Cart/>
+                                {userProfile?.isAdmin && <HeaderLinks.AdminIcon/>}
                             </HeaderLinks>
                         </ul>                    
                     </div>

@@ -7,7 +7,7 @@ export function useWishlist(id){
     const {isAuth, isPending:isLoading, user} = useUser()
     let {isLoading:isPending, data:wishlist} = useQuery({
         enabled: !isLoading  && isAuth,
-        queryFn:()=>getWishlistByUserid(user.user.id),
+        queryFn:()=>getWishlistByUserid(user.id),
         queryKey:["wishlist"],
     })
     if(!isAuth){

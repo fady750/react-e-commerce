@@ -11,11 +11,9 @@ import Spinner from './Spinner';
 import { useProductsByGender } from '../features/Collection/useProductsByGender';
 
 function SwiperImage({render, genderType}) {
-    
     const {isPending, productsCollection} = useProductsByGender(genderType);
     if(isPending) return <Spinner/>
     const ProductCollectionSlice = productsCollection.slice(0, 6);
-    
     return (
         <Swiper
             modules={[Scrollbar, Navigation, Pagination]}

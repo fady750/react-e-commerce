@@ -1,6 +1,5 @@
 import ImageSliderContainer from "./ImageSliderContainer"
 import MainContent from "./MainContent"
-
 function Home() {
     return (
         <div>

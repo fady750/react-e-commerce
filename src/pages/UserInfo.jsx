@@ -1,19 +1,19 @@
+import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router";
-import HomeLink from "../UI/HomeLink"
+import HomeLink from "../UI/HomeLink";
 import LogOut from "../UI/LogOutLink";
+import OrderCard from "../UI/OrderCard";
 import Spinner from "../UI/Spinner";
-import UserOrder from "../features/user/UserOrder";
 import { useGetOrders } from "../features/user/useGetOrders";
 import { useUser } from "../features/user/useUser";
 
 
 function UserInfo() {
     const {isPending, orders} = useGetOrders()
-    const {isAuth, isPending:isLoading, user} = useUser()
+    const {isAuth, isPending:isLoading, userProfile } = useUser()
     const navigate = useNavigate()
-    if(isPending || isLoading) return <Spinner/>
+    if( isLoading ) return <Spinner/>
     if(!isAuth) navigate("/account/login");
-
     return (
         <div>
             <div className=" mx-auto pt-[50px] px-[20px] pb-[70px] md:px[70px] ">
@@ -25,15 +25,31 @@ function UserInfo() {
                     <h1 className="mb-[20px] font-semibold" >MY Account</h1>
                 </div>
                 <div className=" py-[100px]" >
-                    <h5 className=" text-center my-[18px] font-semibold text-lg">{user.user.user_metadata.fullName}</h5>
-                    <p className="my-[18px] font-semibold text-lg">{user.user.email}</p>
+                    <h5 className=" text-center my-[18px] font-semibold text-lg">{userProfile.full_name}</h5>
+                    <p className="my-[18px] font-semibold text-lg">{userProfile.email}</p>
                 </div>
-                <div>
-                    {orders.length > 0 &&  orders.map((ele, idx)=>{
-                    return(
-                        <UserOrder ele = {ele} key={idx}/>
-                    )})}
-                </div>
+
+                {
+                    (!isPending && orders.length !== 0 )
+                    &&
+                    <div className="flex items-center justify-start gap-7" >
+                        {orders.map((ele)=>{
+                            return(
+                                <OrderCard order={ele} key={ele.id} >
+                                    <OrderCard.OrderContainer>
+                                        <OrderCard.OrderHeader/>
+                                        <Divider/>
+                                        <OrderCard.OrderInfo/>
+                                        <Divider/>
+                                        <OrderCard.OrderSummary/>
+                                    </OrderCard.OrderContainer>
+                                    
+                                </OrderCard>
+                            )
+                        })}
+                    </div>
+                }
+
             </div>
         </div>
     )

@@ -15,8 +15,6 @@ function Cart() {
     if(isPending) return <Spinner/>
     if(cart.length === 0) return <EmptyTable tableName="cart"/>
 
-
-
     return (
         <main>
             <FeaturesHeader FeaturesName="cart"/>
@@ -26,7 +24,8 @@ function Cart() {
                     <BillElement.BillContent>
                         <BillElement.BillHeader/>
                         <BillElement.BillSetStatus/>
-                        <BillElement.BillSetStatus/>
+                        <BillElement.CouponCode disabled={true} message="Coupon code will be applied on the checkout page" />
+                        <BillElement.Summary/>
                         <BillElement.ButtonToContinueProcess/>
                     </BillElement.BillContent>
                 </BillElement>

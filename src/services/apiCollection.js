@@ -1,5 +1,5 @@
 import supabase from "./supabase";
-
+import {PAGE_SIZE} from '../utils/constant'
 
 
 export async function updateProduct({id,obj}){
@@ -8,7 +8,7 @@ export async function updateProduct({id,obj}){
     .update(obj)
     .eq('id', id);
     if(error){
-        console.error(error.message);
+        console.error(error);
         throw new Error(error.message);
     }
     return data;
@@ -89,9 +89,10 @@ export async function getProductFilter({gender, ProductSlug}){
 }
 
 export async function getProductForDashboard (){
+
     let { data, error } = await supabase
     .from('products')
-    .select('*')
+    .select('*', {count:"exact"});
     if(error){
         console.error(error);
         throw new Error("Products not could be loaded");

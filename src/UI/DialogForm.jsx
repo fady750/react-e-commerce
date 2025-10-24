@@ -33,6 +33,7 @@ function DialogForm({inputs=[], FormID="", defaultValues={}, SelectedMenuInputs=
                                         id={`${input.inputPathName}SelectLabel`}
                                         defaultValue={defaultValues[input.inputPathName]}
                                         label={input.inputLabel}
+                                        {...register((input.inputPathName))}
                                     >
                                         {input?.selectedItems.map((ele, idx)=>{
                                             return(

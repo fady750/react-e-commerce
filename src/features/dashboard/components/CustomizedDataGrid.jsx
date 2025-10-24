@@ -12,6 +12,7 @@ export default function CustomizedDataGrid() {
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
   
+
   React.useEffect(()=>{
     const openHandler = (e) => {
       setSelectedProduct(e.detail);
@@ -27,9 +28,10 @@ export default function CustomizedDataGrid() {
     };
     window.addEventListener("deleteProduct", deleteHandler);
     return () => window.removeEventListener("deleteProduct", deleteHandler);
-}, [isPending]);
+  }, [isPending]);
   if(isPending) <Spinner/>
 
+  
   return (
     <>
       <DataGrid
@@ -43,6 +45,7 @@ export default function CustomizedDataGrid() {
         initialState={{
           pagination: { paginationModel: { pageSize: 20 } },
         }}
+        loading={isPending}
         pageSizeOptions={[10, 20, 50]}
         disableColumnResize
         density="compact"

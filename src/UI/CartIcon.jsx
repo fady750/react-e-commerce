@@ -20,7 +20,7 @@ function CartLogo({obj, activeSize={}}) {
         const {id, price, images, sizes, productName} = obj
         const orderSize = activeSize.size;
         if(isAuth){
-            const user_id = user.user.id;
+            const user_id = user.id;
             let newObj = {id, price, images, sizes, productName, user_id,orderSize ,quantity:1};
             addCartItem(newObj);
         }

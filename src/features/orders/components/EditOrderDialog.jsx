@@ -61,7 +61,8 @@ function EditOrderDialog({selectedOrder, setEditOrderDialog, editOrderDialog}) {
         }
     ])
     // state for selected menu inputs to display it in same line 
-    const [SelectedMenuInputs,] = useState([{
+    const [SelectedMenuInputs,] = useState([
+        {
             inputLabel:'Delivery Status',
             inputPathName:'deliveryStatus',
             type:"Select Menu",
@@ -145,7 +146,7 @@ function EditOrderDialog({selectedOrder, setEditOrderDialog, editOrderDialog}) {
     }
     // on submit function will call mutation function to make changes in DB 
     function onSubmit(obj){
-        const temp = {couponCode:defaultValues.couponCode,discount:defaultValues.discount,totalOrder:defaultValues.totalOrder,deliveryStatus:defaultValues.deliveryStatus,orderStatus:defaultValues.orderStatus}
+        const temp = {couponCode:defaultValues.couponCode,discount:defaultValues.discount,totalOrder:defaultValues.totalOrder,deliveryStatus:obj.deliveryStatus,orderStatus:obj.orderStatus}
         updateOrder({obj:temp, id:selectedOrder.id});
         onCloseFunction()
     }

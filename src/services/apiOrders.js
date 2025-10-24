@@ -8,11 +8,10 @@ export async function setOrderToSupabase(obj){
     ])
     .select()
     if(error){
-        window.alert("An unexpected error occurred during checkout. Please try again later.");
-        console.log(error);
-        return null;
+        console.error(error);
+        throw new Error(error.message);
     }
-    return 1;
+    return data;
 }
 
 export async function getOrdersByUserId(user_id){

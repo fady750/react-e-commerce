@@ -6,7 +6,7 @@ export function useGetOrders(){
     const {isAuth, isPending:isLoading, user} = useUser()
     const {isPending, data:orders} = useQuery({
         enabled : !isLoading && isAuth,
-        queryFn:()=>getOrdersByUserId(user.user.id),
+        queryFn:()=>getOrdersByUserId(user?.id),
         queryKey:["order"],
     });
     return {isPending, orders};

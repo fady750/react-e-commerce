@@ -13,6 +13,8 @@ import {
 } from '@/features/dashboard/theme/customizations'
 import { useUser } from '../features/user/useUser';
 import { useEffect } from 'react';
+import Spinner from '../UI/Spinner';
+import toast from 'react-hot-toast';
 
 const xThemeComponents = {
     ...chartsCustomizations,
@@ -24,16 +26,18 @@ const xThemeComponents = {
 
 
 function Admin(props) {
-    const { isPending, userProfile} = useUser();
+    const { isPending, userProfile, isAuth} = useUser();
     const navigate = useNavigate()
     useEffect(()=>{
-        if(!isPending && userProfile.isAdmin){
+        if(!isPending && userProfile?.isAdmin){
             navigate('/admin/dashboard')
         }
-        else if(!isPending && !userProfile.isAdmin){
+        else if(!isPending && ( !isAuth || !userProfile?.isAdmin)){
+            toast.error("you are not allowed to open this page");
             navigate('/');
         }
-    }, [isPending, userProfile])
+    }, [isPending, userProfile, isAuth])
+    if(isPending) return <Spinner/>
     return (
         <AppTheme {...props} themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />

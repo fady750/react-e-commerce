@@ -16,7 +16,10 @@ export default function ProductSlider ({genderType}){
         <div className='w-full py-[50px] px-[20px] md:py-[100px] md:px-[70px]' >
             <div className=' pb-5 text-right font-semibold'> <Link to={`collection?gender=${genderType}`} > View All </Link> </div>
             <section  >
-                <Swiper genderType={genderType} render={(product, idx) =>  { return <SwiperSlide key={idx} ><ProductItem ele={product} /></SwiperSlide>} } />
+                <Swiper genderType={genderType} render={(product, idx) =>  
+                { return <SwiperSlide key={idx} >
+                    <ProductItem ele={product} />
+                </SwiperSlide>} }/>
             </section>
         </div>
     );

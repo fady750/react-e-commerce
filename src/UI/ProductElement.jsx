@@ -7,6 +7,7 @@ import {useUser} from "../features/user/useUser"
 import {useAddCart} from "../features/cart/useAddCart"
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router";
+
 const ProductContext = createContext();
 
 export default function ProductElement({children, product}){
@@ -86,11 +87,16 @@ function ProductInfo({children}){
 
 function ProductHeader(){
     const {product} = useContext(ProductContext);
-    const {productName ,price } = product
+    const {productName ,real_price, price} = product
     return (
         <div className=" pt-[20px] lg:pt-[50px]">
             <h1 className=" font-semibold text-left text-base pb-2" >{productName}</h1>
-            <p className="py-2 text-left text-sm" >{ formatCurrency(price)}</p>
+            <p className="py-2 text-left  flex items-center gap-4 text-xl " >
+                <span className="line-through to-black" >
+                    { formatCurrency(real_price)}
+                </span>
+                <span className=" text-red-700" >{ formatCurrency(price)}</span>
+            </p>
         </div>
     )
 }
@@ -102,8 +108,11 @@ function ProductSize(){
         <div className="mt-[30px] mb-[15px]" >
             <h5 className="font-semibold text-left mb-[15px]">Size</h5>
             <ul className="mt-[6px] flex text-xs" >{sizes.map((item)=>{
-                return (<li onClick={() => handleChangeSize(item)} key={item.size} 
-                className={` mb-[15px] pr-[15px] cursor-pointer transition-all duration-300 ${item.quantity === 0 && "text-gray-600 line-through cursor-not-allowed"} ${activeSize?.size === item.size && " border-b-2  border-black pb-1"} `} >
+                return (<li  onClick={() => handleChangeSize(item)} key={item.size} 
+                    className={` mb-[15px] pr-[15px] cursor-pointer transition-all duration-300 
+                        text-l
+                    ${item.quantity === 0 && "text-gray-600 line-through cursor-no-drop"} ${activeSize?.size === item.size && " border-b-2  border-black pb-1"} `} 
+                >
                 {item.size}</li>)})}
             </ul>
         </div>
@@ -126,7 +135,8 @@ function ProductActiveSize(){
 }
 
 function ProductForm(){
-    const {activeSize, itemQuantity, decrementQuantity, incrementQuantity, handleAddToCart, isAddingItem, handleBuyItNow} = useContext(ProductContext)
+    const {activeSize, itemQuantity, decrementQuantity, incrementQuantity, handleAddToCart, isAddingItem, handleBuyItNow, product} = useContext(ProductContext)
+    if(activeSize.size === 0 ) return null;
     return(
         <form>
         <div className="py-6 flex flex-wrap">

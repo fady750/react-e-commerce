@@ -35,7 +35,7 @@ export default function CustomizedDataGrid() {
     <>
       <DataGrid
         checkboxSelection
-        rowHeight={75}
+        rowHeight={100}
         rows={Coupons}
         columns={columns}
         getRowClassName={(params) =>

@@ -4,7 +4,7 @@ import Links from "./Links"
 import { createContext } from "react"
 import { useWishlist } from "../features/wishList/useWishlist";
 import NumberOfItems from "./NumberOfItems";
-
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 const ContextHeaderLinks = createContext();
 
 export default function HeaderLinks ({children}){
@@ -115,6 +115,15 @@ function BurgerIconWishlist({setShowNav}){
         </div>
     )
 }
+function AdminIcon(){
+    return(
+        <>
+        <Link to='/admin/dashboard' >
+            <AdminPanelSettingsIcon/>
+        </Link>
+        </>
+    )
+}
 
 HeaderLinks.Search = Search;
 HeaderLinks.User = User;
@@ -123,3 +132,5 @@ HeaderLinks.Cart = Cart;
 HeaderLinks.BurgerIconLinks = BurgerIconLinks;
 HeaderLinks.BurgerIconUser = BurgerIconUser;
 HeaderLinks.BurgerIconWishlist = BurgerIconWishlist;
+HeaderLinks.AdminIcon = AdminIcon;
+

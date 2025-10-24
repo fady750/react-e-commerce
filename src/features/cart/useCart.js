@@ -7,7 +7,7 @@ export function useCart(){
     let {isPending:isLoading, isAuth, user} = useUser()
     let {isLoading:isPending, data:cart} = useQuery({
         enabled:!isLoading && isAuth,
-        queryFn:() => getCartByUserId(user.user.id),
+        queryFn:() => getCartByUserId(user.id),
         queryKey:[ "cart"],
     })
     if(!isAuth){
