@@ -21,7 +21,7 @@ function WishlistIcon({obj}) {
     function handleAddItem(){
         let {id, productName, price, images, sizes} = obj;
         if(isAuth){
-            const wishlistObj = {id, productName, price, images, sizes ,user_id:user.user.id};
+            const wishlistObj = {id, productName, price, images, sizes ,user_id:user?.id};
             addWishlist(wishlistObj)
         }
         else{

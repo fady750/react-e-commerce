@@ -37,7 +37,7 @@ export default function ProductElement({children, product}){
         const orderSize = activeSize.size;
         const quantity = itemQuantity;
         if(isAuth){
-            const user_id = user.user.id;
+            const user_id = user?.id;
             const obj = {id, price, images, sizes, productName, orderSize, quantity, user_id};
             addCartItem(obj);
         }
@@ -51,7 +51,7 @@ export default function ProductElement({children, product}){
         const orderSize = activeSize.size;
         const quantity = itemQuantity;
         if(isAuth){
-            const user_id = user.user.id;
+            const user_id = user?.id;
             const obj = {id, price, images, sizes, productName, orderSize, quantity, user_id};
             addCartItem(obj);
         }
