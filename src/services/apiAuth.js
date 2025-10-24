@@ -15,19 +15,18 @@ export async function signup({email, password, fullName}){
 }
 
 export async function signinWithGoogle(){
+    const redirectUrl = window.location.origin + '/';
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: 'http://localhost:5173/',
+            redirectTo: redirectUrl,
         },
     });
 
     if (error) {
         console.error("Google login error:", error.message);
-    } else {
-        console.log("Redirecting to Google...");
-    }
-    console.log(data);
+    } 
+
 }
 
 export async function Signin({email, password} ){
