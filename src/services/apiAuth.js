@@ -15,14 +15,12 @@ export async function signup({email, password, fullName}){
 }
 
 export async function signinWithGoogle(){
-    const redirectUrl = window.location.origin + '/';
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: redirectUrl,
+            redirectTo: `${window.location.origin}/auth/callback`,
         },
     });
-
     if (error) {
         console.error("Google login error:", error.message);
     } 
