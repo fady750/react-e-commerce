@@ -38,8 +38,6 @@ export async function getCouponsByName(couponName){
 }
 
 export async function updateCoupon({obj, id}){
-    console.log(obj)
-    console.log(id)
     const { error } = await supabase
     .from('coupons')
     .update(obj)
