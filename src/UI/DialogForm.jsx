@@ -87,9 +87,9 @@ function DialogForm({inputs=[], FormID="", defaultValues={}, SelectedMenuInputs=
                                         if(input.inputPathName === "couponCode"){
                                             return
                                         }
-                                    else{
-                                        return "this field required"
-                                    }
+                                        else if (value === "" ){
+                                            return "this field required"
+                                        }
                                     }
                                 }
                             })}

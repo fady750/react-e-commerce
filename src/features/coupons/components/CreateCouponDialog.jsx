@@ -19,7 +19,7 @@ function CreateCouponDialog() {
         },
         {
             inputLabel: "Coupon Name",
-            inputPathName : "couponName",
+            inputPathName : "couponCode",
             defaultValue : "",
             placeholder:"ex:Discount10Per",
             type:"Text",
