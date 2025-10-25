@@ -100,9 +100,9 @@ function OrderInfo(){
                     </span>
                 </p>
                 <p  >
-                    <p className=" whitespace-nowrap w-fit text-xs" >
+                    <span className=" whitespace-nowrap w-fit text-xs" >
                         {formatDate(created_at)}
-                    </p>
+                    </span>
                 </p>
             </div>
             <div className="flex items-center justify-between" >
@@ -169,4 +169,3 @@ OrderCard.OrderHeader = OrderHeader;
 OrderCard.OrderInfo = OrderInfo;
 OrderCard.OrderSummary = OrderSummary;
 export default OrderCard
-// 

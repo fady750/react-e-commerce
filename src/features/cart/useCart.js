@@ -6,8 +6,8 @@ import { getCartFromLocalStorage } from "../../utils/helpers";
 export function useCart(){
     let {isPending:isLoading, isAuth, user} = useUser()
     let {isLoading:isPending, data:cart} = useQuery({
-        enabled:!isLoading && isAuth,
-        queryFn:() => getCartByUserId(user.id),
+        enabled: !isLoading && isAuth,
+        queryFn:() => getCartByUserId(user?.id),
         queryKey:[ "cart"],
     })
     if(!isAuth){

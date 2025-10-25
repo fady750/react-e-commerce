@@ -9,13 +9,13 @@ import Button from "../../UI/Button";
 
 function WishlistTable({setUpdateComponent}) {
     const {user, isAuth} = useUser();
-    const {isPending:isLoading1, wishlist} = useWishlist(isAuth ? user.user.id : "");
+    const {isPending:isLoading1, wishlist} = useWishlist(isAuth ? user.id : "");
     const {isPending:isLoading2, clearWishlist} = useClearWishlist();
     if(isLoading1) return <Spinner/>
 
     function clearWishlistItems(){
         if(isAuth){
-            clearWishlist(user.user.id)
+            clearWishlist(user?.id)
         }
         else{
             clearWishlistFromLocalStorage();

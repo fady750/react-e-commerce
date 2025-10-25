@@ -23,9 +23,11 @@ export default function CheckoutElement({children}){
     if(isPending || isLoading) return <Spinner/>
 
     function onSubmit(data){
-        const discount = Math.round(Number(CouponPercent?.percent)/100 * totalCart)
+        const discount = CouponPercent ? Math.round(Number(CouponPercent?.percent)/100 * totalCart) : 0;
         const {address, phoneNumber} = data;
         let totalOrder = totalCart - discount;
+        console.log(discount);
+        console.log(totalOrder);
         if(delivery === "City"){
             totalOrder += 2;
         }
