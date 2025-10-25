@@ -32,7 +32,7 @@ function UserInfo() {
                 {
                     (!isPending && orders.length !== 0 )
                     &&
-                    <div className="flex items-center justify-start gap-7" >
+                    <div className="flex items-start justify-start gap-7" >
                         {orders.map((ele)=>{
                             return(
                                 <OrderCard order={ele} key={ele.id} >
